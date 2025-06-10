@@ -1,0 +1,11 @@
+{
+  "post": ["title", "date", "media", "caption", "message_btn"],
+  "message": [
+    "message_popup",
+    "message_form",
+    "message_title",
+    "message_image",
+    "message_caption"
+  ],
+  "main": ["posts"]
+}

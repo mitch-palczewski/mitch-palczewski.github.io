@@ -1,0 +1,21 @@
+{
+    "post_component": "C:\\Users\\mpalc\\OneDrive\\Desktop\\_projects\\website-generator-workspace\\website-generator\\html_components\\post\\default.html",
+    "post_messaging": false,
+    "email": " ",
+    "base_link": "",
+    "github_repo_url": "",
+    "tab_title": "scrapbook",
+    "auto_push_git": true,
+    "grid_cols": {
+        "sm": "1",
+        "md": "2",
+        "lg": "3"
+    },
+    "colors": {
+        "c1": "#e0e4f8",
+        "c2": "#7890f8",
+        "c3": "#60735b",
+        "c4": "#e5d07a",
+        "c5": "#E0DAC3"
+    }
+}
