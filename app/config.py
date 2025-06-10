@@ -28,7 +28,7 @@ def get_resource_paths():
     app_parent_dir = get_parent_dir()
     bundled_dir = get_bundled_dir()
 
-    config_folder = os.path.join(bundled_dir, "config")
+    config_folder = os.path.join(app_root, "config")
     html_components_folder = os.path.join(app_root, "html_components")
     assets_folder = os.path.join(app_root, "assets")
 
