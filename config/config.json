@@ -2,9 +2,9 @@
     "post_component": "C:\\Users\\mpalc\\OneDrive\\Desktop\\_projects\\website-generator-workspace\\website-generator\\html_components\\post\\default.html",
     "post_messaging": false,
     "email": " ",
-    "base_link": "",
-    "github_repo_url": "",
-    "tab_title": "scrapbook",
+    "base_link": "https://mitch-palczewski.github.io/",
+    "github_repo_url": "https://github.com/mitch-palczewski/mitch-palczewski.github.io.git",
+    "tab_title": "Mitch Scrapbook",
     "auto_push_git": true,
     "grid_cols": {
         "sm": "1",
