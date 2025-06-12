@@ -12,5 +12,12 @@
         "media_link": "https://mitch-palczewski.github.io/assets/green-stripe%20ANALYSIS.png",
         "caption": "Green Stripe by Matisse. looking at color relationships. ",
         "base_link": "https://mitch-palczewski.github.io/"
+    },
+    "000003": {
+        "date": "2025-06-12 14:13:51.615496",
+        "title": "Connecting the dots",
+        "media_link": "https://mitch-palczewski.github.io/assets/Screenshot%202025-06-12%20141015.png",
+        "caption": "My website now gets the data on my github page. It could also theoretically get any page with json data formated into posts. e.g. a social media feed.Right now the data flows from my python application to github pages then to my personal website. All with one click of a button!",
+        "base_link": "https://mitch-palczewski.github.io/"
     }
 }
