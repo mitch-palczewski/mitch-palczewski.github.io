@@ -13,6 +13,7 @@ except ImportError:
 from app.util.model import HtmlModel, TkModel
 from app.util.controller import HtmlController, Controller
 from app.gui.components.scroll_frame import ScrollFrame
+from app.util.validation import HtmlValidation
 
 from app.util.controller import JsonController
 colors = JsonController.get_config_data("colors")
@@ -138,7 +139,7 @@ class TextEditor(tk.Frame):
 
     def validate(self):
         text = self.text_field.get('1.0', tk.END)
-        valid = HtmlController.validate_html(type="post", html=text)
+        valid = HtmlValidation.validate_html(type=self.component_type, html=text)
         if valid:
             self.change_validate_btn_color("green")
         else:
