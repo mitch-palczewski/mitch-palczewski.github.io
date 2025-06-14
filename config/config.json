@@ -5,7 +5,7 @@
     "base_link": "",
     "github_repo_url": "",
     "tab_title": "scrapbook",
-    "auto_push_git": true,
+    "auto_push_git": false,
     "grid_cols": {
         "sm": "1",
         "md": "2",

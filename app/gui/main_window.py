@@ -1,4 +1,5 @@
 import tkinter as tk
+import os
 from tkinter import font
 try:
     from ctypes import windll
@@ -26,14 +27,17 @@ class MainWindow(tk.Tk):
         
         FONT_SM = font.Font(family="Helvetica", size=10, weight="bold")
         self.title("Website Generator")
-        self.geometry(f"{1720}x{1100}+5+5")
+        self.geometry(f"{1720}x{1020}+5+5")
         self.resizable(True, True)
         self.minsize(1720, 1020 )
+
+        if os.path.exists("piecon.ico"):
+            self.iconbitmap("piecon.ico")
         self.config(bg=C3, border=2, relief="solid")
         
         #HEADER
         self.header_frame = tk.Frame(self, bg=C2, relief="ridge", border=3)
-        self.header_frame.pack(fill='x', expand=False ,padx=20, pady=10, ipady=10)
+        self.header_frame.pack(fill='x', expand=False ,padx=20, pady=3, ipady=3)
         self.landing_btn = None
         self.test_btn = None
         self.page_title_lbl = None
