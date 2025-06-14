@@ -26,7 +26,7 @@ class MainWindow(tk.Tk):
         super().__init__()
         
         FONT_SM = font.Font(family="Helvetica", size=10, weight="bold")
-        self.title("Website Generator")
+        self.title("Pie Post")
         self.geometry(f"{1720}x{1020}+5+5")
         self.resizable(True, True)
         self.minsize(1720, 1020 )
@@ -104,7 +104,7 @@ class MainWindow(tk.Tk):
         if content == "Landing":
             self.remove_landing_page_btn()
             self.remove_test_btn()
-            self.set_page_title("Website Generator")
+            self.set_page_title("Pie Post")
             landing = Landing(self.body_content, self)
             landing.pack(fill='both', expand= True)
         elif content == "NewPost":
