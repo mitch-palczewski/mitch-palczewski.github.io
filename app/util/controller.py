@@ -187,11 +187,12 @@ class JsonController:
     @staticmethod
     def update_posts_username(new_username):
         """
-        Replaces the Username Link for each post
+        Sets or replaces the username for each post.
         """
-        posts_data:dict = JsonController.get_posts_data()
+        posts_data: dict = JsonController.get_posts_data()
         for post_id, post in posts_data.items():
-            post["username"] = new_username
+            post["username"] = new_username  # This will create or update the key
+        JsonModel.write_json_file(POSTS_JSON_PATH, posts_data)
     
     @staticmethod
     def update_posts_profile_pic(new_profile_pic:str):
@@ -201,6 +202,7 @@ class JsonController:
         posts_data:dict = JsonController.get_posts_data()
         for post_id, post in posts_data.items():
             post["profile_pic"] = new_profile_pic
+        JsonModel.write_json_file(POSTS_JSON_PATH, posts_data)
     
     @staticmethod
     def update_selected_post_component(post_component_path:str):

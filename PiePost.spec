@@ -5,7 +5,7 @@ a = Analysis(
     ['main.py'],
     pathex=[],
     binaries=[],
-    datas=[('config/config.json', 'config'), ('config/html_validation.json', 'html_validation'), ('piecon.ico', 'picon')],
+    datas=[('config/config.json', 'config'), ('config/html_validation.json', 'html_validation'), ('config/piecon.ico', 'picon')],
     hiddenimports=[],
     hookspath=[],
     hooksconfig={},
@@ -35,5 +35,5 @@ exe = EXE(
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
-    icon=['piecon.ico'],
+    icon=['config\\piecon.ico'],
 )
