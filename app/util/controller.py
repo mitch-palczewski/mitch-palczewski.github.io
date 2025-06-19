@@ -53,7 +53,6 @@ class Controller:
         if auto_push_git:
             push_git(github_repo_url)
 
-
     @staticmethod 
     def get_resource_paths(path_type=None):
         """
@@ -184,6 +183,24 @@ class JsonController:
             new_base_link += "/"
         new_media_link = new_base_link + media
         return new_media_link
+    
+    @staticmethod
+    def update_posts_username(new_username):
+        """
+        Replaces the Username Link for each post
+        """
+        posts_data:dict = JsonController.get_posts_data()
+        for post_id, post in posts_data.items():
+            post["username"] = new_username
+    
+    @staticmethod
+    def update_posts_profile_pic(new_profile_pic:str):
+        """
+        Replaces the Profile Pic Link for each post
+        """
+        posts_data:dict = JsonController.get_posts_data()
+        for post_id, post in posts_data.items():
+            post["profile_pic"] = new_profile_pic
     
     @staticmethod
     def update_selected_post_component(post_component_path:str):

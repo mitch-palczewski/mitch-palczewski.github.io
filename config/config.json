@@ -2,9 +2,9 @@
     "post_component": "C:\\Users\\mpalc\\OneDrive\\Desktop\\_projects\\website-generator-workspace\\website-generator\\html_components\\post\\default.html",
     "post_messaging": false,
     "email": " ",
-    "base_link": "",
+    "base_link": "https://baselink.com",
     "github_repo_url": "",
-    "tab_title": "scrapbook",
+    "tab_title": "temp-username",
     "auto_push_git": false,
     "grid_cols": {
         "sm": "1",
@@ -17,5 +17,7 @@
         "c3": "#60735b",
         "c4": "#e5d07a",
         "c5": "#E0DAC3"
-    }
+    },
+    "username": "cool",
+    "profile_pic": "https://baselink.com/assets/Screenshot%20%282%292.png"
 }

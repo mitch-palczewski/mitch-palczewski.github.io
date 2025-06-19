@@ -12,7 +12,7 @@ except ImportError:
     print("Error: windll not imported. Text may be blurred")
     pass
 
-from app.util.controller import JsonController, FileController, HtmlController, Controller
+from app.util.controller import JsonController, FileController, HtmlController, Controller, StringController
 from app.gui.components.config_text_editor import ConfigTextEditor
 
 colors = JsonController.get_config_data("colors")
@@ -35,19 +35,101 @@ class GeneralConfig(tk.Frame):
         body.columnconfigure(0, weight=1)
         body.columnconfigure(1,weight=1)
         body.pack(fill='both', padx=30, pady=30, expand=True)
+        username_config = UsernameConfig(body)
+        username_config.grid(column=0, row=0, sticky= tk.W, pady=10)
+        profile_pic_config = ProfilePicConfig(body)
+        profile_pic_config.grid(column=0, row=1, sticky= tk.W, pady=10)
         tab_title_config = TabTitleConfig(body)
-        tab_title_config.grid(column=0, row=0, sticky=tk.W, pady=10)
+        tab_title_config.grid(column=0, row=2, sticky=tk.W, pady=10)
         icon_config = IconConfig(body)
-        icon_config.grid(column=0, row=1, sticky=tk.W, pady=10)
+        icon_config.grid(column=0, row=3, sticky=tk.W, pady=10)
         column_config = ColumnConfig(body)
-        column_config.grid(column=0, row=2, sticky=tk.W, pady=10)
+        column_config.grid(column=0, row=4, sticky=tk.W, pady=10)
         bg_config = BackgroundColor(body)
-        bg_config.grid(column=0, row=3, sticky=tk.W, pady=10)
+        bg_config.grid(column=0, row=5, sticky=tk.W, pady=10)
         git_hub_config = ConfigTextEditor(body, "Github Repository Link:", update_github_repo_url, "github_repo_url", 60)
-        git_hub_config.grid(column=0, row=4, sticky= tk.W, pady=10)
+        git_hub_config.grid(column=0, row=6, sticky= tk.W, pady=10)
+        
 
 def update_github_repo_url(new_github_repo_url):
     JsonController.set_config_data("github_repo_url", new_github_repo_url)
+
+class ProfilePicConfig(tk.Frame):
+    def __init__(self, container):
+        super().__init__(container)
+        self.config(bg=C1)
+        FONT_LG = font.Font(family="Helvetica", size=15, weight="bold")
+        FONT_SM = font.Font(family="Helvetica", size=10, weight="bold")
+        body= tk.Frame(self, bg = "white")
+        body.columnconfigure(0, weight=1)
+        body.columnconfigure(1, weight=1)
+        body.pack(padx=5, pady=5)
+        lbl = tk.Label(body, text="Profile Picture: ", font=FONT_LG, bg="white")
+        lbl.grid(column=0, row=0)
+        btn = tk.Button(body,
+                        text= "Upload Image",
+                        command=  self.update_icon
+                        ,font=FONT_SM
+                        )
+        btn.grid(column=1, row=0)
+
+    def update_icon(self):
+        self.get_media()
+        
+
+    def get_media(self):
+        filetypes = ([
+            ("PNG files", "*.png"), 
+            ("JPEG files", "*.jpg;*.jpeg")
+            ]
+        )
+        file_path = fd.askopenfilename(
+            title="media upload",
+            initialdir=os.path.expanduser("~"),
+            filetypes=filetypes
+        )
+        if file_path:
+            new_file_path = FileController.add_media_to_assets_folder([file_path])[0]
+            media_link = StringController.format_media_link(JsonController.get_config_data("base_link"), new_file_path)
+            JsonController.set_config_data('profile_pic', media_link)
+            JsonController.update_posts_profile_pic(media_link)
+            pass
+
+class UsernameConfig(tk.Frame):
+    def __init__(self, container):
+        super().__init__(container)
+        self.config(bg="white")
+        FONT_SM = font.Font(family="Helvetica", size=10, weight="bold")
+        FONT_MD = font.Font(family="Helvetica", size=15, weight="bold")
+        FONT_LG = font.Font(family="Helvetica", size=15, weight="bold")
+        self.config_data = JsonController.get_config_data()
+        body= tk.Frame(self, bg = "white")
+        body.columnconfigure(0, weight=1)
+        body.columnconfigure(1, weight=1)
+        body.columnconfigure(2, weight=1)
+        body.columnconfigure(3, weight=1)
+        body.pack(padx=5, pady=5)
+        lbl = tk.Label(body, text="Username: ", font=FONT_LG, bg="white")
+        lbl.grid(column=0, row=0)
+        self.entry = ttk.Entry(
+            master=body, 
+            font=FONT_MD,
+            width= 38)
+        self.entry.insert(0,self.config_data["username"])
+        self.entry.grid(column=1,row=0)
+        update_btn = tk.Button(body, text="Update", font=FONT_SM, command=self.update)
+        update_btn.grid(column=2,row=0)
+        cancel_btn = tk.Button(body, text="Cancel", font=FONT_SM, command=self.cancel)
+        cancel_btn.grid(column=3, row=0)
+
+    def update(self):
+        new_username = self.entry.get()
+        JsonController.set_config_data('username', new_username)
+        JsonController.update_posts_username(new_username)
+      
+    def cancel(self):
+        self.entry.delete(0,tk.END)
+        self.entry.insert(0,self.config_data["username"])
 
 class BackgroundColor(tk.Frame):
     def __init__(self, container):

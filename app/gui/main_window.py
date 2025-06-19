@@ -31,8 +31,8 @@ class MainWindow(tk.Tk):
         self.resizable(True, True)
         self.minsize(1720, 1020 )
 
-        if os.path.exists("piecon.ico"):
-            self.iconbitmap("piecon.ico")
+        if os.path.exists("config/piecon.ico"):
+            self.iconbitmap("config/piecon.ico")
         self.config(bg=C3, border=2, relief="solid")
         
         #HEADER

@@ -195,6 +195,8 @@ class NewPost(tk.Frame):
         title = self.get_title_text()
         media_link = StringController.format_media_link(base_link, media)
         new_post_id = Controller.get_unique_id(posts_data.keys())
+        username = JsonController.get_config_data("username")
+        profile_pic = JsonController.get_config_data("profile_pic")
 
         PostController.insert_post_id(post_html, new_post_id, self.column_span.get())
         PostController.insert_date(post_html)
@@ -210,7 +212,9 @@ class NewPost(tk.Frame):
             "title": title,
             "media_link": media_link,
             "caption": caption,
-            "base_link": base_link 
+            "base_link": base_link,
+            "username": username,
+            "profile_pic": profile_pic
         }
         JsonController.append_posts_data(post=json_post_entry, post_id= new_post_id)
 
