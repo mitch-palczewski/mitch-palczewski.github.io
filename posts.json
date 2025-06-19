@@ -4,34 +4,53 @@
         "title": "First Post Of Website Generator",
         "media_link": "https://mitch-palczewski.github.io/assets/Screenshot%202025-05-15%20222758.png",
         "caption": "An early screenshot of the website generator that made this post. Wow this took a while but im happy to have it functional. ",
-        "base_link": "https://mitch-palczewski.github.io/"
+        "base_link": "https://mitch-palczewski.github.io/",
+        "username": "Mitch Palczewski",
+        "profile_pic": "https://mitch-palczewski.github.io/assets/Screenshot%202024-11-26%20135537.png"
     },
     "000002": {
         "date": "2025-06-10 15:54:50.426369",
         "title": "Green Stripe Color Analysis",
         "media_link": "https://mitch-palczewski.github.io/assets/green-stripe%20ANALYSIS.png",
         "caption": "Green Stripe by Matisse. looking at color relationships. ",
-        "base_link": "https://mitch-palczewski.github.io/"
+        "base_link": "https://mitch-palczewski.github.io/",
+        "username": "Mitch Palczewski",
+        "profile_pic": "https://mitch-palczewski.github.io/assets/Screenshot%202024-11-26%20135537.png"
     },
     "000003": {
         "date": "2025-06-12 14:13:51.615496",
         "title": "Connecting the dots",
         "media_link": "https://mitch-palczewski.github.io/assets/Screenshot%202025-06-12%20141015.png",
         "caption": "My website now gets the data on my github page. It could also theoretically get any page with json data formated into posts. e.g. a social media feed.Right now the data flows from my python application to github pages then to my personal website. All with one click of a button!",
-        "base_link": "https://mitch-palczewski.github.io/"
+        "base_link": "https://mitch-palczewski.github.io/",
+        "username": "Mitch Palczewski",
+        "profile_pic": "https://mitch-palczewski.github.io/assets/Screenshot%202024-11-26%20135537.png"
     },
     "000004": {
         "date": "2025-06-13 11:01:05.605507",
         "title": "Whiteboard with friends",
         "media_link": "https://mitch-palczewski.github.io/assets/Screenshot%202025-05-20%20232153.png",
         "caption": "",
-        "base_link": "https://mitch-palczewski.github.io/"
+        "base_link": "https://mitch-palczewski.github.io/",
+        "username": "Mitch Palczewski",
+        "profile_pic": "https://mitch-palczewski.github.io/assets/Screenshot%202024-11-26%20135537.png"
     },
     "000005": {
         "date": "2025-06-15 08:41:23.053714",
         "title": "Regect Pie Post Logo ",
         "media_link": "https://mitch-palczewski.github.io/assets/piepost5.png",
         "caption": "E Z as Pie",
-        "base_link": "https://mitch-palczewski.github.io/"
+        "base_link": "https://mitch-palczewski.github.io/",
+        "username": "Mitch Palczewski",
+        "profile_pic": "https://mitch-palczewski.github.io/assets/Screenshot%202024-11-26%20135537.png"
+    },
+    "000006": {
+        "date": "2025-06-19 17:59:48.089937",
+        "title": "Python Packages ",
+        "media_link": "https://mitch-palczewski.github.io/assets/Screenshot%202025-06-18%20125106.png",
+        "caption": "Thought this was a cool image on the python download page.",
+        "base_link": "https://mitch-palczewski.github.io/",
+        "username": "Mitch Palczewski",
+        "profile_pic": "https://mitch-palczewski.github.io/assets/Screenshot%202024-11-26%20135537.png"
     }
 }
