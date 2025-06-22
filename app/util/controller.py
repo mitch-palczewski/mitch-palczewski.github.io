@@ -147,6 +147,10 @@ class JsonController:
         JsonModel.write_json_file(CONFIG_JSON_PATH, config_data)
     
     @staticmethod
+    def set_posts_data(posts_data:dict):
+        JsonModel.write_json_file(POSTS_JSON_PATH, posts_data)
+    
+    @staticmethod
     def append_posts_data(post: dict, post_id):
         posts_data = JsonController.get_posts_data()
         posts_data[post_id] = post
@@ -462,6 +466,17 @@ class PostController:
         post = webpage_html.find("div", attrs={"data-post_id": id})
         post.decompose()
         HtmlModel.write_html_file(HTML_WEBPAGE_PATH, webpage_html)
+        PostController.delete_posts_json_data(id)
+
+    @staticmethod
+    def delete_posts_json_data(id):
+        posts_data = JsonController.get_posts_data()
+        try:
+            del posts_data[id]
+        except:
+            print(f"Could not find id={id} for posts data deletion")
+        JsonController.set_posts_data(posts_data)
+    
         
 class MessagingController:
     @staticmethod
