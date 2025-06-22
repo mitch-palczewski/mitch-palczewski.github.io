@@ -7,7 +7,6 @@ except ImportError:
     print("Error: windll not imported. Text may be blurred")
     pass
 
-from app.gui.subwindows.configure_windows.config_messaging import ConfigMessaging
 from app.gui.subwindows.configure_windows.general_config import GeneralConfig
 from app.gui.subwindows.configure_windows.config_post import ConfigPost
 from app.gui.subwindows.configure_windows.config_header import ConfigHeader
@@ -37,8 +36,7 @@ class ConfigureWebsite(tk.Frame):
         header_frame.columnconfigure(1, weight=1)
         header_frame.columnconfigure(2, weight=1)
         header_frame.columnconfigure(3, weight=1)
-        header_frame.columnconfigure(4, weight=1)
-        header_frame.columnconfigure(5, weight=1)
+
         header_frame.pack(fill="x", expand=True)
         btn_padx = 10
         btn_pady = 10
@@ -50,14 +48,6 @@ class ConfigureWebsite(tk.Frame):
             font=FONT_SM
         )
         self.general_config_btn.grid(column=0, row=0, sticky=tk.EW, padx=btn_padx, pady=btn_pady)
-        self.config_messaging_btn = tk.Button(
-            header_frame, 
-            text="Configure Messaging", 
-            command=lambda:self.load_content("ConfigMessaging"),
-            bg="white",
-            font=FONT_SM
-        )
-        self.config_messaging_btn.grid(column=1, row=0, sticky=tk.EW, padx=btn_padx, pady=btn_pady)   
         self.config_post_btn = tk.Button(
             header_frame, 
             text="Configure Post", 
@@ -65,7 +55,7 @@ class ConfigureWebsite(tk.Frame):
             bg="white",
             font=FONT_SM
         )
-        self.config_post_btn.grid(column=2, row=0, sticky=tk.EW, padx=btn_padx, pady=btn_pady)
+        self.config_post_btn.grid(column=1, row=0, sticky=tk.EW, padx=btn_padx, pady=btn_pady)
         self.config_header_btn = tk.Button(
             header_frame, 
             text="Configure Header", 
@@ -73,7 +63,7 @@ class ConfigureWebsite(tk.Frame):
             bg="white",
             font=FONT_SM
         )
-        self.config_header_btn.grid(column=3, row=0, sticky=tk.EW, padx=btn_padx, pady=btn_pady)
+        self.config_header_btn.grid(column=2, row=0, sticky=tk.EW, padx=btn_padx, pady=btn_pady)
         self.config_footer_btn = tk.Button(
             header_frame, 
             text="Configure Footer", 
@@ -81,7 +71,7 @@ class ConfigureWebsite(tk.Frame):
             bg="white",
             font=FONT_SM
         )
-        self.config_footer_btn.grid(column=4, row=0, sticky=tk.EW, padx=btn_padx, pady=btn_pady)
+        self.config_footer_btn.grid(column=3, row=0, sticky=tk.EW, padx=btn_padx, pady=btn_pady)
 
         
         #BODY
@@ -94,7 +84,7 @@ class ConfigureWebsite(tk.Frame):
 
     def set_btns_color(self, color):
         self.general_config_btn.config(bg=color)
-        self.config_messaging_btn.config(bg=color)
+       
         self.config_post_btn.config(bg=color)
         self.config_header_btn.config(bg=color)
         self.config_footer_btn.config(bg=color)
@@ -107,15 +97,11 @@ class ConfigureWebsite(tk.Frame):
 
     def load_content(self, content:str):
         """
-        Accepts content: "GeneralConfig", "ConfigMessaging", "ConfigPost", "ConfigSite"
+        Accepts content: "GeneralConfig", "ConfigPost", "ConfigSite"
         """
         self.set_btns_color(C5)
         self.new_content_frame()
-        if content == "ConfigMessaging":
-            config_messaging = ConfigMessaging(self.body_content)
-            config_messaging.pack(fill='both', expand= True)
-            self.config_messaging_btn.config(bg=C4)
-            return
+
         if content == "GeneralConfig":
             general_config = GeneralConfig(self.body_content)
             general_config.pack(fill='both', expand= True)

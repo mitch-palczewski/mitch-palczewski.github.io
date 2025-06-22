@@ -161,7 +161,6 @@ class NewPost(tk.Frame):
         base_link = config_data["base_link"]
         posts_data:dict = JsonController.get_posts_data()
         post_html: bs = HtmlController.get_post_component()
-        post_messaging:bool = config_data["post_messaging"]
         title = self.get_title_text()
         new_post_id = Controller.get_unique_id(posts_data.keys())
         delete_media(post_html)
@@ -169,7 +168,6 @@ class NewPost(tk.Frame):
         PostController.insert_date(post_html)
         PostController.insert_title(post_html, title)
         PostController.insert_caption(post_html, caption)
-        PostController.insert_message_btn(post_messaging, post_html, title, "", caption)
         posts_div_tag.insert(0, post_html)     
         HtmlController.set_webpage_html(html_webpage)
         json_post_entry = {
@@ -191,7 +189,6 @@ class NewPost(tk.Frame):
         base_link = config_data["base_link"]
         posts_data:dict = JsonController.get_posts_data()
         post_html: bs = HtmlController.get_post_component()
-        post_messaging:bool = config_data["post_messaging"]
         title = self.get_title_text()
         media_link = StringController.format_media_link(base_link, media)
         new_post_id = Controller.get_unique_id(posts_data.keys())
@@ -203,7 +200,6 @@ class NewPost(tk.Frame):
         PostController.insert_title(post_html, title)
         PostController.insert_image(post_html, media)
         PostController.insert_caption(post_html, caption)
-        PostController.insert_message_btn(post_messaging, post_html, title, media_link, caption)
         posts_div_tag.insert(0, post_html)     
         HtmlController.set_webpage_html(html_webpage)
 
