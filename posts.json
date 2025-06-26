@@ -52,5 +52,14 @@
         "base_link": "https://mitch-palczewski.github.io/",
         "username": "Mitch Palczewski",
         "profile_pic": "https://mitch-palczewski.github.io/assets/Screenshot%202024-11-26%20135537.png"
+    },
+    "000007": {
+        "date": "2025-06-26 19:44:27.862182",
+        "title": "Wave Function Collapse Text",
+        "media_link": "https://mitch-palczewski.github.io/assets/wavefunctionmountains.png",
+        "caption": "Looking into wave function collapse and potential project ideas. \n\nThis text was made by mapping each char to a set of other chars. Given a char it randomly selects an element from its joined set and makes that char the new input, iterating recursivly. ",
+        "base_link": "https://mitch-palczewski.github.io/",
+        "username": "Mitch Palczewski",
+        "profile_pic": "https://mitch-palczewski.github.io/assets/Screenshot%202024-11-26%20135537.png"
     }
 }
