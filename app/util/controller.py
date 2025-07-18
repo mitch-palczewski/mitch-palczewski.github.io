@@ -1,7 +1,6 @@
 from datetime import date
 from bs4 import BeautifulSoup as bs
 import os
-import sys
 from tkinter.messagebox import showwarning
 
 from app.util.model import Model, HtmlModel, StringModel, JsonModel, FileModel
@@ -459,6 +458,7 @@ class PostController:
         if caption:
             PostController.insert_caption(post, caption)        
         HtmlModel.write_html_file(HTML_WEBPAGE_PATH, webpage_html)
+        Controller.push_to_git()
     
     @staticmethod
     def delete_post(id:str):
@@ -467,6 +467,7 @@ class PostController:
         post.decompose()
         HtmlModel.write_html_file(HTML_WEBPAGE_PATH, webpage_html)
         PostController.delete_posts_json_data(id)
+        Controller.push_to_git()
 
     @staticmethod
     def delete_posts_json_data(id):

@@ -5,11 +5,12 @@ try:
     from ctypes import windll
     windll.shcore.SetProcessDpiAwareness(1)
 except ImportError:
-    print("Error: windll not imported. Text may be blurred")
+   
     pass
 
 from app.util.controller import JsonController
 from app.util.serve_localhost import start_server
+from app.gui.tutorial.tutorial_window import init_tutorial
 from .subwindows.landing import Landing
 from .subwindows.new_post import NewPost
 from .subwindows.configure_website import ConfigureWebsite
@@ -31,7 +32,7 @@ class MainWindow(tk.Tk):
         self.resizable(True, True)
         self.minsize(1720, 1020 )
 
-        if os.path.exists("config/piecon.ico"):
+        if os.path.exists("config/piecon.ico") and os.name == "nt":
             self.iconbitmap("config/piecon.ico")
         self.config(bg=C3, border=2, relief="solid")
         
@@ -48,6 +49,10 @@ class MainWindow(tk.Tk):
         self.body_content = None
         
         self.load_content("Landing")
+        init_tutorial(self)
+
+    
+
 
     def new_content_frame(self):
         if self.body_content:
