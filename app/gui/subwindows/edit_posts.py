@@ -10,7 +10,7 @@ except ImportError:
     pass
 
 from app.gui.components.scroll_frame import ScrollFrame
-from app.gui.components.post import Post
+from app.gui.components.post_component import Post
 from app.util.controller import HtmlController, JsonController
 from app.config import get_app_root
 

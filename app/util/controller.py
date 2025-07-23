@@ -19,8 +19,19 @@ MESSAGE_HTML = RESOURCE_PATHS["message_html"]
 HTML_POST_FOLDER = RESOURCE_PATHS["html_post_folder"]
 HTML_HEADER_FOLDER = RESOURCE_PATHS["html_header_folder"]
 HTML_FOOTER_FOLDER = RESOURCE_PATHS["html_footer_folder"]
-HTML_WEBPAGE_PATH = RESOURCE_PATHS["html_webpage"]
+WEBPAGE_HTML_PATH = RESOURCE_PATHS["html_webpage"]
 ASSET_FOLDER_PATH = RESOURCE_PATHS["assets_folder"]
+
+class PathsController:
+    @staticmethod 
+    def get_path(dest:str):
+        """
+        Vaild dest [
+            "webpage_html"
+            ]
+        """
+        if dest == "webpage_html":
+            return WEBPAGE_HTML_PATH
 
 
 class Controller:
@@ -236,7 +247,7 @@ class JsonController:
 class HtmlController:
     @staticmethod
     def get_webpage_html()->bs:
-        html_webpage:bs = HtmlModel.open_html(HTML_WEBPAGE_PATH)
+        html_webpage:bs = HtmlModel.open_html(WEBPAGE_HTML_PATH)
         if not html_webpage:
             raise ValueError("Error: HTML webpage not found in file system.")
         return html_webpage
@@ -251,7 +262,7 @@ class HtmlController:
     
     @staticmethod
     def set_webpage_html(html):
-        HtmlModel.write_html_file(HTML_WEBPAGE_PATH, html)
+        HtmlModel.write_html_file(WEBPAGE_HTML_PATH, html)
 
     @staticmethod
     def update_component(component_type:str, component_path:str):
@@ -282,11 +293,11 @@ class HtmlController:
             webpage_header_tag.append(new_header)
         else:
             webpage_header_tag.replace_with(new_header)
-        HtmlModel.write_html_file(HTML_WEBPAGE_PATH, html_webpage)
+        HtmlModel.write_html_file(WEBPAGE_HTML_PATH, html_webpage)
     
     @staticmethod
     def update_footer(component_path):
-        html_webpage:bs = HtmlModel.open_html(HTML_WEBPAGE_PATH)
+        html_webpage:bs = HtmlModel.open_html(WEBPAGE_HTML_PATH)
         new_footer:bs = HtmlModel.open_html(component_path)
         new_footer_tag = new_footer.find("footer")
         webpage_footer_tag = html_webpage.find("footer")
@@ -297,26 +308,26 @@ class HtmlController:
             webpage_footer_tag.append(new_footer)
         else:
             webpage_footer_tag.replace_with(new_footer)
-        HtmlModel.write_html_file(HTML_WEBPAGE_PATH, html_webpage)
+        HtmlModel.write_html_file(WEBPAGE_HTML_PATH, html_webpage)
 
     @staticmethod
     def update_tab_title():
         config_data = JsonController.get_config_data()
         tab_title = config_data["tab_title"]
-        html_webpage:bs = HtmlModel.open_html(HTML_WEBPAGE_PATH)
+        html_webpage:bs = HtmlModel.open_html(WEBPAGE_HTML_PATH)
         if not html_webpage:
             raise ValueError("Error: HTML webpage not found in file system.")
         title_tag:bs = html_webpage.find("title")
         if title_tag:
             title_tag.clear()
             title_tag.insert(0, tab_title)
-        HtmlModel.write_html_file(HTML_WEBPAGE_PATH, html_webpage)
+        HtmlModel.write_html_file(WEBPAGE_HTML_PATH, html_webpage)
 
     @staticmethod
     def update_grid_cols():
         config_data = JsonController.get_config_data()
         grid_cols = config_data["grid_cols"]
-        html_webpage:bs = HtmlModel.open_html(HTML_WEBPAGE_PATH)
+        html_webpage:bs = HtmlModel.open_html(WEBPAGE_HTML_PATH)
         if not html_webpage:
             raise ValueError("Error: HTML webpage not found in file system.")
         posts_tag :bs = html_webpage.find("div", id="posts")
@@ -333,11 +344,11 @@ class HtmlController:
         class_list.append(f"md:grid-cols-{grid_cols['md']}")
         class_list.append(f"lg:grid-cols-{grid_cols['lg']}")
         posts_tag["class"] = class_list
-        HtmlModel.write_html_file(HTML_WEBPAGE_PATH, html_webpage)
+        HtmlModel.write_html_file(WEBPAGE_HTML_PATH, html_webpage)
     
     @staticmethod
     def update_bg_color(color):
-        html_webpage:bs = HtmlModel.open_html(HTML_WEBPAGE_PATH)
+        html_webpage:bs = HtmlModel.open_html(WEBPAGE_HTML_PATH)
         main_tag:bs = html_webpage.find("main")
         classes = main_tag.get("class", [])
         for index, class_item in enumerate(classes):
@@ -457,7 +468,7 @@ class PostController:
             PostController.insert_title(post, title)
         if caption:
             PostController.insert_caption(post, caption)        
-        HtmlModel.write_html_file(HTML_WEBPAGE_PATH, webpage_html)
+        HtmlModel.write_html_file(WEBPAGE_HTML_PATH, webpage_html)
         Controller.push_to_git()
     
     @staticmethod
@@ -465,7 +476,7 @@ class PostController:
         webpage_html = HtmlController.get_webpage_html()
         post = webpage_html.find("div", attrs={"data-post_id": id})
         post.decompose()
-        HtmlModel.write_html_file(HTML_WEBPAGE_PATH, webpage_html)
+        HtmlModel.write_html_file(WEBPAGE_HTML_PATH, webpage_html)
         PostController.delete_posts_json_data(id)
         Controller.push_to_git()
 
