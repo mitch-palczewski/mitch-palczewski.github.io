@@ -30,6 +30,7 @@ def get_resource_paths():
 
     config_folder = os.path.join(app_root, "config")
     html_components_folder = os.path.join(app_root, "html_components")
+    themes_folder = os.path.join(app_root, "themes")
     assets_folder = os.path.join(app_root, "assets")
 
     config_json_path = os.path.join(config_folder, "config.json")
@@ -46,6 +47,7 @@ def get_resource_paths():
     HtmlModel.make_html_file_if_new(html_webpage, "")
     FileModel.make_folder_if_new(html_components_folder)
     FileModel.make_folder_if_new(html_post_folder)
+    FileModel.make_folder_if_new(themes_folder)
     FileModel.make_folder_if_new(html_header_folder)
     FileModel.make_folder_if_new(html_footer_folder)
     FileModel.make_folder_if_new(assets_folder)
@@ -59,7 +61,8 @@ def get_resource_paths():
         "html_header_folder": html_header_folder,
         "html_footer_folder": html_footer_folder,
         "html_webpage": html_webpage,
-        "assets_folder": "assets"
+        "assets_folder": "assets",
+        "theme_folder": themes_folder
     }
     return resource_paths
 

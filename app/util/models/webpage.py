@@ -1,6 +1,6 @@
 from bs4 import BeautifulSoup as bs
 
-from util.controller import PathsController
+from app.util.controller import PathsController
 
 class Webpage:
     """
@@ -9,8 +9,8 @@ class Webpage:
         html
         posts_div
     """
-    def __init__(self, webpage_html_path:str = None):
-        self.html_path = webpage_html_path or PathsController.get_path("webpage_html")
+    def __init__(self, html_path:str = None):
+        self.html_path = html_path or PathsController.get_path("webpage_html")
         self.html = self.open_html(self.html_path)
         self.posts_div = self.html.find("div", id="posts")
 

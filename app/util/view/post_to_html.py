@@ -34,8 +34,11 @@ class PostHtmlRenderer:
             self.render_video()
         elif post_type == "gallery":
             self.render_gallery()
-        Warning(f"Post HTML Renderer recieved invalid post type {post_type}. \
+        else:
+            print(f"Post HTML Renderer recieved invalid post type {post_type}. \
                 Post Type should be {VALID_POST_TYPES}")
+        print("TODO implement writing html")
+        
     
     def render_text(self):
         html:bs = self.theme.text_post_html
@@ -70,8 +73,11 @@ class PostHtmlRenderer:
 
     @staticmethod
     def insert_post_id(html:bs, id:str):
-        tag = html.find(attrs={"data-post_id": "post_id"})
-        tag["data-post_id"] = id
+        tag = html.find(attrs={"data-post_id": True})
+        if tag: 
+            tag["data-post_id"] = id
+        else: 
+            html.attrs["data-post_id"] = id
 
     @staticmethod
     def insert_title(html:bs, title:str):
@@ -149,6 +155,9 @@ class PostHtmlRenderer:
     def is_valid_html_image(filename: str) -> bool:
         suffix = Path(filename).suffix.lower()
         return suffix in VALID_IMAGE_EXTENSIONS
+
+
+
 
             
             

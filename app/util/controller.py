@@ -32,6 +32,7 @@ class PathsController:
         """
         if dest == "webpage_html":
             return WEBPAGE_HTML_PATH
+        
 
 
 class Controller:
@@ -75,6 +76,7 @@ class Controller:
             "html_footer_folder"
             "html_webpage"
             "assets_folder"
+            "theme_folder"
         """
         if path_type:
             return RESOURCE_PATHS[path_type]

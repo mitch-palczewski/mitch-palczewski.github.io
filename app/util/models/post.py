@@ -37,7 +37,6 @@ class Post():
         self._links:list = []
 
         self.type:str = None
-        self.theme = None
     
     @property
     def caption(self):
@@ -209,8 +208,4 @@ class Post():
 
   
 
-test_post = Post()
-test_post.set_unique_id({})
-test_post.caption = "hello"
-print(test_post.type.value)
-print(test_post.get_json_post())
+
