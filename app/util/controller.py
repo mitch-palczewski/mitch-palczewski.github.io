@@ -67,6 +67,8 @@ class Controller:
     @staticmethod 
     def get_resource_paths(path_type=None):
         """
+            "config_folder"
+            "app_assets_folder"
             "config_json"
             "html_validation"
             "posts_json"
@@ -82,7 +84,10 @@ class Controller:
             return RESOURCE_PATHS[path_type]
         return RESOURCE_PATHS
 
-
+    @staticmethod
+    def get_app_assets(name):
+        app_assets_folder = Controller.get_resource_paths("app_assets_folder")
+        return os.path.join(app_assets_folder, name)
 
 
 class StringController:

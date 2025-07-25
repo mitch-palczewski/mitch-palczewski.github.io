@@ -1,7 +1,6 @@
 import tkinter as tk
 from tkinter import ttk, font
 from bs4 import BeautifulSoup as bs
-from datetime import datetime
 
 try:
     from ctypes import windll
@@ -12,7 +11,12 @@ except ImportError:
 
 from app.gui.components.get_media import GetMediaBtn, MediaList
 from app.gui.components.text_field import TextField
-from app.util.controller import JsonController, HtmlController, FileController, Controller, StringController, PostController
+from app.util.controller import JsonController, FileController, Controller
+
+from app.gui.widgets.scrollable_frame import ScrollableFrame
+from app.gui.widgets.options_menu import OptionMenu
+from app.gui.widgets.buttons import OpenButton
+from app.gui.widgets.labels import InfoIcon, Label
 
 from app.util.models.post import Post
 from app.util.models.theme import Theme
@@ -26,6 +30,79 @@ C1 = colors["c1"]
 C2 = colors["c2"]
 C3 = colors["c3"]
 C4 = colors["c4"]
+
+INFO_ICON_SIZE = 36
+OPEN_BUTTON_SIZE = INFO_ICON_SIZE - 2
+
+class NewPostFrame(tk.Frame):
+    def __init__(self, container, main_window):
+        super().__init__(container)
+        scroll_frame = ScrollableFrame(container)
+        scroll_frame.pack(fill="both", expand=True)
+        scrollable_frame = scroll_frame.get_scrollable_frame()
+        header_frame = tk.Frame(scrollable_frame)
+        header_frame.columnconfigure(0, weight=1)
+        header_frame.columnconfigure(1, weight=1)
+        header_frame.pack(fill='x')
+        post_type_frame = PostTypeFrame(header_frame)
+        post_type_frame.grid(row=0, column=0, padx=10, pady=10)
+        post_theme_frame = PostThemeFrame(header_frame)
+        post_theme_frame.grid(row=0, column=1, padx=10, pady=10)
+
+    def on_select(self):
+        pass
+
+    
+class PostTypeFrame(tk.Frame):
+    def __init__(self, container):
+        super().__init__(container)
+        type_info = (
+        "The Post Type Determines what type of media is present in your post.\n" \
+        "Use the Gallery Post to include multiple Images, Videos, or blocks of text")
+        selectable_types = ["Select Post Type", "Text Post", "Image Post", "Video Post", "Gallery Post"]
+        label = Label(self, text="Post Type:", font_size = 16)
+        label.pack(fill=tk.X, padx=5, pady=5, side="left")
+        option_menu = OptionMenu(
+            self,
+            selectable_types[0],
+            selectable_types,
+            self.on_select,
+            15
+        )
+        option_menu.pack(side="left")
+        info = InfoIcon(self, type_info, INFO_ICON_SIZE)
+        info.pack(side="left", padx=3)
+        
+    def on_select(self):
+        pass
+
+class PostThemeFrame(tk.Frame):
+    def __init__(self, container):
+        super().__init__(container)
+        type_info = ("Select a Theme for your post. Themes html files can be modified for personal customization")
+        selectable_types = ["base.html"]
+        print("TODO get list of available themes")
+        label = Label(self, text="Post Theme:", font_size = 16)
+        label.pack(fill=tk.X, padx=5, pady=5, side="left")
+        option_menu = OptionMenu(
+            self,
+            selectable_types[0],
+            selectable_types,
+            self.on_select,
+            15
+        )
+        option_menu.pack(side="left")
+        test = OpenButton(self , self.open_theme, height=OPEN_BUTTON_SIZE)
+        test.pack(side="left", padx=3)
+        info = InfoIcon(self, type_info, INFO_ICON_SIZE)
+        info.pack(side="left")
+        
+            
+    def on_select(self):
+        pass
+
+    def open_theme(self):
+        pass
 
 
 class NewPost(tk.Frame):
@@ -108,7 +185,7 @@ class NewPost(tk.Frame):
         build_post_btn = tk.Button(
             footer_frame, 
             text="Build Post", 
-            command=self.build_post2, 
+            command=self.build_post, 
             font=build_post_font, 
             bg=C4,
             width=20)
@@ -120,7 +197,6 @@ class NewPost(tk.Frame):
         column_span_spinbox = ttk.Spinbox(footer_frame, from_=1, to=10, textvariable=self.column_span, wrap=True, width=4)
         column_span_spinbox.pack(side='left')
         
-    
     def get_caption_text(self)->str:
         caption = self.caption_field.get_text()
         if caption.endswith("\n"):
@@ -133,114 +209,34 @@ class NewPost(tk.Frame):
             title = title[:-1]
         return title
 
-    def update_selected_post_component():
-        pass
-
-    def build_post2(self):
+    def build_post(self):
         webpage = Webpage(html_path=Controller.get_resource_paths("html_webpage"))
         theme = Theme("themes/default.html")
-        Warning("TODO: new_post.py build_post2(). Default theme is hardcoded. allow user to select a theme")
-        post = Post()
+        print("TODO: new_post.py build_post2(). Default theme is hardcoded. allow user to select a theme")
+        post:Post = self.aquire_post_data()
+        renderer = PostHtmlRenderer(post, theme)
+        html_post = renderer.render()
+        webpage.insert_html_post(html_post)
+        self.append_posts_json(post)
+ 
+    def aquire_post_data(self):
+        post = Post(JsonController.get_config_data("base_link"))
         post.title = self.get_title_text()
         post.caption = self.get_caption_text()
-        post.image_links = FileController.add_media_to_assets_folder(self.media)
-        Warning("TODO: assuming media is a single image. expand compatible media types")
-        post.base_link = JsonController.get_config_data("base_link")
+        post.media_paths = FileController.add_media_to_assets_folder(self.media)
+        print("TODO: assuming media is a single image. expand compatible media types")
         post.username = JsonController.get_config_data("username")
         post.profile_pic = JsonController.get_config_data("profile_pic")
         post.email = JsonController.get_config_data("email")
         post.links = []
-        Warning("TODO: links not implemented. expand compatible media types")
+        print("TODO: links not implemented. expand compatible media types")
         post.set_unique_id(JsonController.get_posts_data())
-        renderer = PostHtmlRenderer(post, webpage, theme)
-        renderer.render()
+        return post
 
-        
-
-
-        
-
-    def build_post(self):
-        caption:str = self.get_caption_text()
-        local_media_paths:list = FileController.add_media_to_assets_folder(self.media)
-        if len(local_media_paths) == 0 and caption == "":
-            #Build out if text is blank
-            print("Upload Media or Text")
-            return
-        
-        #IF post is single image
-        if len(local_media_paths) == 1:
-            self.build_single_media_post(local_media_paths[0], caption)
-            self.main_window.load_content("Landing")
-        #IF post is text only 
-        elif len(local_media_paths) == 0: 
-            self.build_text_only_post(caption)
-            self.main_window.load_content("Landing")
-        else:
-            print("Posts with multiple media or video elements not supported at this time.") 
-        Controller.web_page_change()
-    
-    def build_text_only_post(self, caption:str):
-        html_webpage: bs = HtmlController.get_webpage_html()
-        posts_div_tag = html_webpage.find("div", id="posts")
-        if not posts_div_tag:
-            raise ValueError("Error: No element with id 'posts' found.")
-        config_data: dict = JsonController.get_config_data()
-        base_link = config_data["base_link"]
-        posts_data:dict = JsonController.get_posts_data()
-        post_html: bs = HtmlController.get_post_component()
-        title = self.get_title_text()
-        new_post_id = Controller.get_unique_id(posts_data.keys())
-        delete_media(post_html)
-        PostController.insert_post_id(post_html, new_post_id, self.column_span.get())
-        PostController.insert_date(post_html)
-        PostController.insert_title(post_html, title)
-        PostController.insert_caption(post_html, caption)
-        posts_div_tag.insert(0, post_html)     
-        HtmlController.set_webpage_html(html_webpage)
-        json_post_entry = {
-            "date": str(datetime.now()),
-            "title": title,
-            "media_link": "",
-            "caption": caption,
-            "base_link": base_link 
-        }
-        JsonController.append_posts_data(post=json_post_entry, post_id= new_post_id)
-
-    def build_single_media_post(self, media:str, caption:str):
-        html_webpage: bs = HtmlController.get_webpage_html()
-        posts_div_tag = html_webpage.find("div", id="posts")
-        if not posts_div_tag:
-            raise ValueError("Error: No element with id 'posts' found.")
-        
-        config_data: dict = JsonController.get_config_data()
-        base_link = config_data["base_link"]
-        posts_data:dict = JsonController.get_posts_data()
-        post_html: bs = HtmlController.get_post_component()
-        title = self.get_title_text()
-        media_link = StringController.format_media_link(base_link, media)
-        new_post_id = Controller.get_unique_id(posts_data.keys())
-        username = JsonController.get_config_data("username")
-        profile_pic = JsonController.get_config_data("profile_pic")
-
-        PostController.insert_post_id(post_html, new_post_id, self.column_span.get())
-        PostController.insert_date(post_html)
-        PostController.insert_title(post_html, title)
-        PostController.insert_image(post_html, media)
-        PostController.insert_caption(post_html, caption)
-        posts_div_tag.insert(0, post_html)     
-        HtmlController.set_webpage_html(html_webpage)
-
-        json_post_entry = {
-            "date": str(datetime.now()),
-            "title": title,
-            "media_link": media_link,
-            "caption": caption,
-            "base_link": base_link,
-            "username": username,
-            "profile_pic": profile_pic
-        }
-        JsonController.append_posts_data(post=json_post_entry, post_id= new_post_id)
+    def append_posts_json(self, post:Post):
+        posts_data = JsonController.get_posts_data()
+        new_post_data = post.get_json_post()
+        JsonController.set_posts_data(posts_data.update(new_post_data))
 
 def delete_media(post_html:bs):
     media_tag = post_html.find("img", attrs={"data-type": "media"})

@@ -1,181 +1,106 @@
 <!DOCTYPE html>
 
 <html lang="en">
-  <head>
-    <link
-      href="assets\Screenshot 2024-12-01 164529.png"
-      rel="icon"
-      type="image/png"
-    />
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1" name="viewport" />
-    <title>temp-username</title>
-    <link href="styles.css" rel="stylesheet" />
-    <script src="https://cdn.tailwindcss.com"></script>
-  </head>
-  <body class="flex flex-col min-h-screen">
-    <header class="bg-blue-600 text-white p-4">
-      <h1 class="text-3xl font-bold text-center">Welcome to my Scrapbook</h1>
-    </header>
-    <main class="flex-1 p-4 bg-[None]">
-      <!--vvv Grid div-->
-      <div
-        class="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
-        id="posts"
-      >
-        <div
-          class="bg-gray-200 p-2 shadow relative lg:col-span-1"
-          data-post_id="000004"
-          data-type="post"
-          id="post_id"
-        >
-          <div class="grid grid-cols-2">
-            <h1
-              class="text-2xl font-bold text-gray-800"
-              data-type="title"
-              id="title"
-            >
+<head>
+<link href="assets\Screenshot 2024-12-01 164529.png" rel="icon" type="image/png"/>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>temp-username</title>
+<link href="styles.css" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="flex flex-col min-h-screen">
+<header class="bg-blue-600 text-white p-4">
+<h1 class="text-3xl font-bold text-center">Welcome to my Scrapbook</h1>
+</header>
+<main class="flex-1 p-4 bg-[None]">
+<!--vvv Grid div-->
+<div class="grid gap-6 grid-cols-1 md:grid-cols-1 lg:grid-cols-1" data-type="posts_container" id="posts"><div class="bg-black border border-gray-700 p-4 w-full lg:w-2/3 mx-auto" data-post_id="000005" data-type="image_post">
+<div class="flex items-start gap-4">
+<div class="max-w-2/3">
+<img alt="Description" class="max-h-[66vh] border-gray-600" data-type="image" src="assets\Screenshot (1).png"/>
+</div>
+<div class="flex-1">
+<div class="flex items-center justify-between mb-2">
+<h1 class="text-white text-xl font-semibold" data-type="title">asdas</h1>
+<span class="text-gray-400 text-sm" data-type="date">2025-07-23 21:40:59.233442</span>
+</div>
+<p class="text-white" data-type="caption">dasda</p>
+<div data-type="link_container">
+<a class="text-yellow-400 hover:text-yellow-600 hover:underline transition-colors" data-type="link" href="https://lipsum.app/random/500x500">Link 1</a>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-gray-200 p-2 shadow relative lg:col-span-1" data-post_id="000004" data-type="post" id="post_id">
+<div class="grid grid-cols-2">
+<h1 class="text-2xl font-bold text-gray-800" data-type="title" id="title">
               sdasda
             </h1>
-            <h6 class="text-right" data-type="date" id="date">06-22-2025</h6>
-          </div>
-          <img
-            alt=""
-            class="w-full max-h-[60vh] object-contain rounded py1"
-            data-type="media"
-            id="media"
-            loading="lazy"
-            src="assets\Screenshot (1).png"
-          />
-          <div class="bg-gray-300 p-2 mt-4 mb-14">
-            <p data-type="caption" id="caption">sdadasdasd</p>
-          </div>
-          <button
-            class="mt-5 px-4 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 transition duration-300 absolute bottom-3 left-2 right-2 z-10"
-            data-type="message_btn"
-            id="message_btn"
-          >
+<h6 class="text-right" data-type="date" id="date">06-22-2025</h6>
+</div>
+<img alt="" class="w-full max-h-[60vh] object-contain rounded py1" data-type="media" id="media" loading="lazy" src="assets\Screenshot (1).png"/>
+<div class="bg-gray-300 p-2 mt-4 mb-14">
+<p data-type="caption" id="caption">sdadasdasd</p>
+</div>
+<button class="mt-5 px-4 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 transition duration-300 absolute bottom-3 left-2 right-2 z-10" data-type="message_btn" id="message_btn">
             Comment
           </button>
-        </div>
-        <div
-          class="bg-gray-200 p-2 shadow relative lg:col-span-1"
-          data-post_id="000003"
-          data-type="post"
-          id="post_id"
-        >
-          <div class="grid grid-cols-2">
-            <h1
-              class="text-2xl font-bold text-gray-800"
-              data-type="title"
-              id="title"
-            >
+</div>
+<div class="bg-gray-200 p-2 shadow relative lg:col-span-1" data-post_id="000003" data-type="post" id="post_id">
+<div class="grid grid-cols-2">
+<h1 class="text-2xl font-bold text-gray-800" data-type="title" id="title">
               sdad
             </h1>
-            <h6 class="text-right" data-type="date" id="date">06-22-2025</h6>
-          </div>
-          <img
-            alt=""
-            class="w-full max-h-[60vh] object-contain rounded py1"
-            data-type="media"
-            id="media"
-            loading="lazy"
-            src="assets\Screenshot (1).png"
-          />
-          <div class="bg-gray-300 p-2 mt-4 mb-14">
-            <p data-type="caption" id="caption">sadas</p>
-          </div>
-          <button
-            class="mt-5 px-4 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 transition duration-300 absolute bottom-3 left-2 right-2 z-10"
-            data-type="message_btn"
-            id="message_btn"
-          >
+<h6 class="text-right" data-type="date" id="date">06-22-2025</h6>
+</div>
+<img alt="" class="w-full max-h-[60vh] object-contain rounded py1" data-type="media" id="media" loading="lazy" src="assets\Screenshot (1).png"/>
+<div class="bg-gray-300 p-2 mt-4 mb-14">
+<p data-type="caption" id="caption">sadas</p>
+</div>
+<button class="mt-5 px-4 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 transition duration-300 absolute bottom-3 left-2 right-2 z-10" data-type="message_btn" id="message_btn">
             Comment
           </button>
-        </div>
-        <div
-          class="bg-gray-200 p-2 shadow relative lg:col-span-1"
-          data-post_id="000002"
-          data-type="post"
-          id="post_id"
-        >
-          <div class="grid grid-cols-2">
-            <h1
-              class="text-2xl font-bold text-gray-800"
-              data-type="title"
-              id="title"
-            >
+</div>
+<div class="bg-gray-200 p-2 shadow relative lg:col-span-1" data-post_id="000002" data-type="post" id="post_id">
+<div class="grid grid-cols-2">
+<h1 class="text-2xl font-bold text-gray-800" data-type="title" id="title">
               sad
             </h1>
-            <h6 class="text-right" data-type="date" id="date">06-22-2025</h6>
-          </div>
-          <img
-            alt=""
-            class="w-full max-h-[60vh] object-contain rounded py1"
-            data-type="media"
-            id="media"
-            loading="lazy"
-            src="assets\Screenshot 2024-12-01 163125.png"
-          />
-          <div class="bg-gray-300 p-2 mt-4 mb-14">
-            <p data-type="caption" id="caption">asdasd</p>
-          </div>
-          <button
-            class="mt-5 px-4 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 transition duration-300 absolute bottom-3 left-2 right-2 z-10"
-            data-type="message_btn"
-            id="message_btn"
-          >
+<h6 class="text-right" data-type="date" id="date">06-22-2025</h6>
+</div>
+<img alt="" class="w-full max-h-[60vh] object-contain rounded py1" data-type="media" id="media" loading="lazy" src="assets\Screenshot 2024-12-01 163125.png"/>
+<div class="bg-gray-300 p-2 mt-4 mb-14">
+<p data-type="caption" id="caption">asdasd</p>
+</div>
+<button class="mt-5 px-4 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 transition duration-300 absolute bottom-3 left-2 right-2 z-10" data-type="message_btn" id="message_btn">
             Comment
           </button>
-        </div>
-        <div
-          class="bg-gray-200 p-2 shadow relative lg:col-span-1"
-          data-post_id="000001"
-          data-type="post"
-          id="post_id"
-        >
-          <div class="grid grid-cols-2">
-            <h1
-              class="text-2xl font-bold text-gray-800"
-              data-type="title"
-              id="title"
-            >
+</div>
+<div class="bg-gray-200 p-2 shadow relative lg:col-span-1" data-post_id="000001" data-type="post" id="post_id">
+<div class="grid grid-cols-2">
+<h1 class="text-2xl font-bold text-gray-800" data-type="title" id="title">
               asda
             </h1>
-            <h6 class="text-right" data-type="date" id="date">06-14-2025</h6>
-          </div>
-          <img
-            alt=""
-            class="w-full max-h-[60vh] object-contain rounded py1"
-            data-type="media"
-            id="media"
-            loading="lazy"
-            src="assets\Jalapeno.png"
-          />
-          <div class="bg-gray-300 p-2 mt-4 mb-14">
-            <p data-type="caption" id="caption">sdasda</p>
-          </div>
-        </div>
-        <div
-          class="bg-cover bg-center relative p-5 lg:col-span-1"
-          data-post_id="000016"
-          data-type="post"
-          id="post_id"
-          style="background-image: url('https://lipsum.app/random/1600x900')"
-        ></div>
-        <!--^^^ Grid /div-->
-      </div>
-    </main>
-    <footer
-      class="bg-gradient-to-r from-[#e0e4f8] via-blue-300 to-[#7890f8] p-5"
-    >
-      <div class="max-w-5xl mx-auto text-center">
-        <h1 class="text-md font-serif font-bold text-white">
+<h6 class="text-right" data-type="date" id="date">06-14-2025</h6>
+</div>
+<img alt="" class="w-full max-h-[60vh] object-contain rounded py1" data-type="media" id="media" loading="lazy" src="assets\Jalapeno.png"/>
+<div class="bg-gray-300 p-2 mt-4 mb-14">
+<p data-type="caption" id="caption">sdasda</p>
+</div>
+</div>
+<div class="bg-cover bg-center relative p-5 lg:col-span-1" data-post_id="000016" data-type="post" id="post_id" style="background-image: url('https://lipsum.app/random/1600x900')"></div>
+<!--^^^ Grid /div-->
+</div>
+</main>
+<footer class="bg-gradient-to-r from-[#e0e4f8] via-blue-300 to-[#7890f8] p-5">
+<div class="max-w-5xl mx-auto text-center">
+<h1 class="text-md font-serif font-bold text-white">
           Thanks For visiting my Scrapbook
         </h1>
-        <p class="mt-4 text-xl text-white opacity-90">with a cool gradient</p>
-      </div>
-    </footer>
-    <script src="script.js"></script>
-  </body>
+<p class="mt-4 text-xl text-white opacity-90">with a cool gradient</p>
+</div>
+</footer>
+<script src="script.js"></script>
+</body>
 </html>

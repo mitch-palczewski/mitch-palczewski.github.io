@@ -12,7 +12,7 @@ from app.util.controller import JsonController
 from app.util.serve_localhost import start_server
 from app.gui.tutorial.tutorial_window import init_tutorial
 from .subwindows.landing import Landing
-from .subwindows.new_post import NewPost
+from .subwindows.new_post import NewPost, NewPostFrame
 from .subwindows.configure_website import ConfigureWebsite
 from .subwindows.edit_posts import EditPosts
 
@@ -45,11 +45,11 @@ class MainWindow(tk.Tk):
         
         #BODY
         self.body_frame = tk.Frame(self, bg=C2, relief="ridge", border=4)
-        self.body_frame.pack(fill='both', expand= True,padx=20, pady=(0,20))
+        self.body_frame.pack(fill='both', expand= True, padx=20, pady=(0,20))
         self.body_content = None
         
         self.load_content("Landing")
-        init_tutorial(self)
+        #init_tutorial(self)
 
     
 
@@ -116,7 +116,7 @@ class MainWindow(tk.Tk):
             self.set_page_title("New Post")
             self.pack_landing_page_btn()
             self.pack_test_btn()
-            new_post = NewPost(self.body_content, self)
+            new_post = NewPostFrame(self.body_content, self)
             new_post.pack(fill='both', expand= True)
         elif content == "ConfigureWebsite":
             self.set_page_title("Configure Website")

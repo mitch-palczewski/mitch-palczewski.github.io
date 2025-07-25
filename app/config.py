@@ -29,6 +29,7 @@ def get_resource_paths():
     bundled_dir = get_bundled_dir()
 
     config_folder = os.path.join(app_root, "config")
+    app_assets_folder = os.path.join(config_folder, "app_assets")
     html_components_folder = os.path.join(app_root, "html_components")
     themes_folder = os.path.join(app_root, "themes")
     assets_folder = os.path.join(app_root, "assets")
@@ -53,6 +54,8 @@ def get_resource_paths():
     FileModel.make_folder_if_new(assets_folder)
 
     resource_paths = {
+        "config_folder": config_folder,
+        "app_assets_folder": app_assets_folder,
         "config_json": config_json_path,
         "html_validation": html_validation_path,
         "posts_json": posts_json_path,
@@ -65,5 +68,3 @@ def get_resource_paths():
         "theme_folder": themes_folder
     }
     return resource_paths
-
-

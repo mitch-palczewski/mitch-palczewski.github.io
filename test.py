@@ -1,19 +1,32 @@
-from bs4 import BeautifulSoup as bs
+#!/usr/bin/env python3
+import tkinter as tk
 
-html_string = '''
-<div class="bg-black border border-gray-700 rounded-none p-4 w-full lg:w-2/3 mx-auto" data-post_id="" data-type="text_post">
-  <div class="flex items-center justify-between mb-2">
-    <h1 class="text-white text-xl font-semibold" data-type="title">Text Post Title</h1>
-    <span class="text-gray-400 text-sm" data-type="date">2024-06-10</span>
-  </div>
-  <p class="text-white" data-type="caption">Lorem ipsum...</p>
-  <div class="flex justify-start flex-wrap" data-type="link_container">
-    <a class="pr-3 text-yellow-400 hover:text-yellow-600 hover:underline transition-colors" data-type="link" href="https://lipsum.app/random/500x500">Link 1</a>
-  </div>
-</div>
-'''
+# Adjust this import to point at where your ScrollText class lives
+from app.gui.widgets.text import ScrollText
+# Ensure BaseStyle is on the import path
+from app.gui.styles import BaseStyle
 
-soup = bs(html_string, "html.parser")
-tag = soup.find(attrs={"data-post_id": True})
-tag["data-post_id"] = "000001"
-print(tag)  # This will print the div as expected
+def main():
+    root = tk.Tk()
+    root.title("ScrollText Test")
+
+    # Instantiate ScrollText (uses BaseStyle internally)
+    scroll = ScrollText(root, width=60, height=15)
+    scroll.pack(padx=10, pady=10, fill="both", expand=True)
+
+    # Insert sample text
+    sample_text = "\n".join(f"Line {i}" for i in range(1, 21))
+    scroll.insert("1.0", sample_text)
+
+    # Button to print current contents to console
+    def on_print():
+        print("=== ScrollText Contents ===")
+        print(scroll.get_all())
+
+    btn = tk.Button(root, text="Print Contents", command=on_print)
+    btn.pack(pady=(0,10))
+
+    root.mainloop()
+
+if __name__ == "__main__":
+    main()
