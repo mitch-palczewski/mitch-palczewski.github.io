@@ -1,8 +1,10 @@
 import tkinter as tk
+from app.gui.styles import BaseStyle
 
 class ScrollableFrame(tk.Frame):
     def __init__(self, parent, vertical=True, horizontal=False, **kwargs):
         super().__init__(parent, **kwargs)
+        style = BaseStyle()
         self.canvas = tk.Canvas(self, borderwidth=0, highlightthickness=0)
         self.v_scroll = tk.Scrollbar(self, orient="vertical",
                                      command=self.canvas.yview) if vertical else None
@@ -16,7 +18,7 @@ class ScrollableFrame(tk.Frame):
             self.h_scroll.pack(side="bottom", fill="x")
         self.canvas.pack(side="left", fill="both", expand=True)
         
-        self.scrollable_frame = tk.Frame(self.canvas)
+        self.scrollable_frame = tk.Frame(self.canvas, background=style.page_background)
         self.window_id = self.canvas.create_window((0, 0),
                                                    window=self.scrollable_frame,
                                                    anchor="nw")

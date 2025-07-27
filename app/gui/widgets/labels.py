@@ -12,15 +12,19 @@ class Label(tk.Label):
             text=text,  
             justify="left",
             font=self.style.font,
+            background=self.style.widget_background,
             **kwargs)
+
 
 
 class InfoIcon(tk.Label):
     def __init__(self, master, text, icon_height=30, **kwargs):
-        super().__init__(master, **kwargs)
         self.style = BaseStyle()
         self.icon = load_icon("info_icon.png", icon_height)
-        self.config(image=self.icon, cursor="hand2", background=self.style.background, height=icon_height)
+        self.background = self.style.background
+        super().__init__(master, background=self.background, image=self.icon,cursor="hand2",  height=icon_height,**kwargs)  
+        
+
 
         self.tooltip_win = tk.Toplevel(master)
         self.tooltip_win.wm_overrideredirect(True)  
@@ -87,3 +91,9 @@ class InfoIcon(tk.Label):
     def hide_tooltip(self, event):
         self.tooltip_win.withdraw()  
 
+class InfoIconLight(InfoIcon):
+    def __init__(self, master, text, icon_height=30, **kwargs):
+        super().__init__(master, text, icon_height, **kwargs)
+        style = BaseStyle()
+        self.icon = load_icon("info_icon_light.png", icon_height)
+        self.config(image=self.icon, background=style.widget_background)

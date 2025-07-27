@@ -189,11 +189,36 @@
           </h2>
           <span class="text-gray-400 text-sm" data-type="date">2024-06-10</span>
         </div>
-        <div class="grid grid-cols-3 gap-4" data-type="gallery">
+        <div class="grid grid-cols-3 gap-4 [grid-auto-flow:dense]" data-type="gallery">
           <img
-            src="https://lipsum.app/random/500x800"
+            src="https://lipsum.app/random/600x500"
             alt="Image"
-            class="object-cover border border-gray-600 rounded-none max-h-[50vh]"
+            class="object-cover border bg-[#2E2E2C] border-gray-600 rounded-none max-h-[50vh] mx-auto block"
+            data-type="image"
+          />
+
+          <video
+            controls
+            class="border border-gray-600 rounded-none col-span-2 w-full"
+            data-type="video"
+          >
+            <source
+              src="video1.mp4"
+              type="video/mp4"
+              data-type="video_source"
+            />
+          </video>
+          <p
+            class="text-white bg-[#2E2E2C] p-2 p-auto border border-gray-600 block"
+            data-type="text"
+          >
+            This is a text element in a gallery post. <br />
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          </p>
+          <img
+            src="https://lipsum.app/random/300x800"
+            alt="Image"
+            class="object-cover border border-gray-600 rounded-none max-h-[50vh] mx-auto block"
             data-type="image"
           />
           <video
@@ -207,37 +232,13 @@
               data-type="video_source"
             />
           </video>
-
-          <img
-            src="https://lipsum.app/random/800x800"
-            alt="Image"
-            class="object-cover border border-gray-600 rounded-none max-h-[50vh]"
-            data-type="media"
-          />
-          <img
-            src="https://lipsum.app/random/1200x800"
-            alt="Image"
-            class="object-cover border border-gray-600 rounded-none max-h-[50vh]"
-            data-type="media"
-          />
-          <video
-            controls
-            class="border border-gray-600 rounded-none col-span-2 w-full"
+          <p
+            class="text-white bg-[#2E2E2C] p-2 p-auto border border-gray-600 block"
+            data-type="text"
           >
-            <source src="video1.mp4" type="video/mp4" data-type="media" />
-          </video>
-          <img
-            src="https://lipsum.app/random/1200x800"
-            alt="Image"
-            class="object-cover border border-gray-600 rounded-none max-h-[50vh]"
-            data-type="media"
-          />
-          <img
-            src="https://lipsum.app/random/1200x800"
-            alt="Image"
-            class="object-cover border border-gray-600 rounded-none max-h-[50vh]"
-            data-type="media"
-          />
+            This is a text element in a gallery post. <br />
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          </p>
         </div>
         <p class="mt-4 text-white" data-type="caption">
           Here’s a caption that describes the collection above, giving context

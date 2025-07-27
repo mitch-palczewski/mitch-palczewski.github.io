@@ -4,7 +4,7 @@ import tkinter as tk
 from app.gui.styles import BaseStyle
 
 class ScrollText(ScrolledText):
-    def __init__(self, master, width:int = 80, height:int = 10, **kwargs):
+    def __init__(self, master, width:int = 80, height:int = 10, font_size = 12, **kwargs):
         style = BaseStyle()
         super().__init__(
             master, 
@@ -16,6 +16,7 @@ class ScrollText(ScrolledText):
             bg= style.activebackground,
             fg=style.foreground,
             insertbackground = style.foreground,
+            font = (style.font[0], font_size),
             **kwargs
         )
 
@@ -27,6 +28,7 @@ class Entry(tk.Entry):
     def __init__(self,
                  master,
                  width: int = 20,
+                 font_size = 12,
                  **kwargs):
         style = BaseStyle()
 
@@ -39,6 +41,7 @@ class Entry(tk.Entry):
             bg=style.activebackground,
             fg=style.foreground,
             insertbackground=style.foreground,
+            font=(style.font[0], font_size),
             **kwargs
         )
 

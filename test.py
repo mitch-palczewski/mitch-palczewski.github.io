@@ -16,7 +16,7 @@ def main():
 
     # Insert sample text
     sample_text = "\n".join(f"Line {i}" for i in range(1, 21))
-    scroll.insert("1.0", sample_text)
+    #scroll.insert("1.0", sample_text)
 
     # Button to print current contents to console
     def on_print():

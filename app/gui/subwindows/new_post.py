@@ -16,7 +16,9 @@ from app.util.controller import JsonController, FileController, Controller
 from app.gui.widgets.scrollable_frame import ScrollableFrame
 from app.gui.widgets.options_menu import OptionMenu
 from app.gui.widgets.buttons import OpenButton
-from app.gui.widgets.labels import InfoIcon, Label
+from app.gui.widgets.labels import InfoIcon, InfoIconLight,Label
+from app.gui.widgets.text import Entry, ScrollText
+from app.gui.styles import BaseStyle
 
 from app.util.models.post import Post
 from app.util.models.theme import Theme
@@ -33,56 +35,107 @@ C4 = colors["c4"]
 
 INFO_ICON_SIZE = 36
 OPEN_BUTTON_SIZE = INFO_ICON_SIZE - 2
+TEXT_ENTRY_WIDTH = 100
+TEXT_FONT_SIZE = 16
 
 class NewPostFrame(tk.Frame):
     def __init__(self, container, main_window):
         super().__init__(container)
-        scroll_frame = ScrollableFrame(container)
+        scroll_frame = ScrollableFrame(self)
         scroll_frame.pack(fill="both", expand=True)
         scrollable_frame = scroll_frame.get_scrollable_frame()
-        header_frame = tk.Frame(scrollable_frame)
+        form_frame = FormFrame(scrollable_frame)
+        form_frame.pack( pady=10, padx=10)
+        
+
+class UploadTypeFrame(tk.Frame):
+    def __init__(self, container):
+        super().__init__(container)
+        style = BaseStyle()
+        self.config(
+            background=style.widget_background,
+            highlightbackground=style.background,
+            highlightcolor=style.background,
+            highlightthickness=5)
+        self.upload_frame:tk.Frame = None
+        
+    def set_post_type(self, post_type):
+        if self.upload_frame:
+            self.upload_frame.forget()
+        if post_type == "Select Post Type":
+            self.forget()
+        if post_type == "Image Post":
+            self.upload_frame = ImageUploadFrame(self)
+            self.upload_frame.pack()
+            self.pack()
+
+class FormFrame(tk.Frame):
+    def __init__(self, container):
+        super().__init__(container)
+        style = BaseStyle()
+        self.config(background=style.page_background)
+        upload_type_frame = UploadTypeFrame(self)
+        header_frame = tk.Frame(self,
+                                highlightbackground=style.background,
+                                highlightcolor=style.background,
+                                highlightthickness=5,
+                                background=style.widget_background)
         header_frame.columnconfigure(0, weight=1)
         header_frame.columnconfigure(1, weight=1)
-        header_frame.pack(fill='x')
-        post_type_frame = PostTypeFrame(header_frame)
+        header_frame.pack(fill='x', pady=10)
+        post_type_frame = PostTypeFrame(header_frame, upload_type_frame)
         post_type_frame.grid(row=0, column=0, padx=10, pady=10)
         post_theme_frame = PostThemeFrame(header_frame)
         post_theme_frame.grid(row=0, column=1, padx=10, pady=10)
 
-    def on_select(self):
-        pass
+        body_frame = tk.Frame(self, background=style.widget_background)
+        body_frame.pack(pady=10)
+        post_title_frame = PostTitleFrame(body_frame)
+        post_title_frame.pack(fill='x', padx=10,pady=10)
+        post_caption_frame = PostCaptionFrame(body_frame)
+        post_caption_frame.pack(fill="x", padx=10,pady=10)
 
-    
+        
+        upload_type_frame.pack(fill='x', pady=10)
+        
 class PostTypeFrame(tk.Frame):
-    def __init__(self, container):
+    def __init__(self, container, upload_type_frame: UploadTypeFrame):
         super().__init__(container)
+        style = BaseStyle()
+        self.upload_type_frame = upload_type_frame
+        self.config(background=style.widget_background)
         type_info = (
         "The Post Type Determines what type of media is present in your post.\n" \
         "Use the Gallery Post to include multiple Images, Videos, or blocks of text")
         selectable_types = ["Select Post Type", "Text Post", "Image Post", "Video Post", "Gallery Post"]
-        label = Label(self, text="Post Type:", font_size = 16)
+        label = Label(self, text="Post Type:", font_size = TEXT_FONT_SIZE)
         label.pack(fill=tk.X, padx=5, pady=5, side="left")
-        option_menu = OptionMenu(
+        self.option_menu = OptionMenu(
             self,
             selectable_types[0],
             selectable_types,
             self.on_select,
             15
         )
-        option_menu.pack(side="left")
+        self.option_menu.pack(side="left")
         info = InfoIcon(self, type_info, INFO_ICON_SIZE)
         info.pack(side="left", padx=3)
         
-    def on_select(self):
-        pass
+    def on_select(self, selected_value):
+        self.upload_type_frame.set_post_type(selected_value)
+
 
 class PostThemeFrame(tk.Frame):
     def __init__(self, container):
         super().__init__(container)
-        type_info = ("Select a Theme for your post. Themes html files can be modified for personal customization")
+        style = BaseStyle()
+        self.config(background=style.widget_background)
+        type_info = (
+            "Select a Theme for your post. Themes html files can be modified for personal customization.\n"
+            "Select the open button to view the selected theme")
         selectable_types = ["base.html"]
         print("TODO get list of available themes")
-        label = Label(self, text="Post Theme:", font_size = 16)
+        label = Label(self, text="Post Theme:", font_size = TEXT_FONT_SIZE)
         label.pack(fill=tk.X, padx=5, pady=5, side="left")
         option_menu = OptionMenu(
             self,
@@ -104,6 +157,35 @@ class PostThemeFrame(tk.Frame):
     def open_theme(self):
         pass
 
+class PostTitleFrame(tk.Frame):
+    def __init__(self, container):
+        super().__init__(container)
+        header = tk.Frame(self)
+        header.pack(fill='x')
+        label = Label(header, "Post Title:", TEXT_FONT_SIZE)
+        label.pack(side='left')
+        info_icon = InfoIconLight(header, "Enter Post Title. Title is limited to a single line.", INFO_ICON_SIZE)
+        info_icon.pack(side='left', padx=3)
+        self.title_entry = Entry(self, width = 75, font_size=14)
+        self.title_entry.pack(side='left')
+
+class PostCaptionFrame(tk.Frame):
+    def __init__(self, container):
+        super().__init__(container)
+        header = tk.Frame(self)
+        header.pack(fill='x')
+        label = Label(header, "Post Caption:", TEXT_FONT_SIZE)
+        label.pack(side='left')
+        info_icon = InfoIconLight(header, "Enter Post Caption. Can include multiple paragraphs", INFO_ICON_SIZE)
+        info_icon.pack(side='left', padx=3)
+        self.caption_entry = ScrollText(self, width=75, height=12, font_size=14)
+        self.caption_entry.pack(side='left')
+
+class ImageUploadFrame(tk.Frame):
+     def __init__(self, container):
+        super().__init__(container)
+        test = Label(self, "hello")
+        test.pack()
 
 class NewPost(tk.Frame):
     def __init__(self, container, main_window):
@@ -237,6 +319,7 @@ class NewPost(tk.Frame):
         posts_data = JsonController.get_posts_data()
         new_post_data = post.get_json_post()
         JsonController.set_posts_data(posts_data.update(new_post_data))
+
 
 def delete_media(post_html:bs):
     media_tag = post_html.find("img", attrs={"data-type": "media"})
