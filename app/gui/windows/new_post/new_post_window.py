@@ -9,21 +9,29 @@ except ImportError:
     print("Error: windll not imported. Text may be blurred")
     pass
 
-from app.gui.components.get_media import GetMediaBtn, MediaList
+
 from app.gui.components.text_field import TextField
-from app.util.controller import JsonController, FileController, Controller
+
+
+from app.gui.windows.new_post.get_media import UploadMediaBtn, MediaEntriesFrame, MediaCollection
+from app.gui.windows.new_post.build_post import BuildPostButton
+from app.gui.windows.new_post.new_post_controller import NewPostController
 
 from app.gui.widgets.scrollable_frame import ScrollableFrame
 from app.gui.widgets.options_menu import OptionMenu
 from app.gui.widgets.buttons import OpenButton
-from app.gui.widgets.labels import InfoIcon, InfoIconLight,Label
+from app.gui.widgets.labels import InfoIcon, InfoIconLight,WidgetLabel
 from app.gui.widgets.text import Entry, ScrollText
+from app.gui.widgets.frames import  BorderWidgetFrame, WidgetFrame
 from app.gui.styles import BaseStyle
+
 
 from app.util.models.post import Post
 from app.util.models.theme import Theme
 from app.util.models.webpage import Webpage
 from app.util.view.post_to_html import PostHtmlRenderer
+from app.util.controllers.extensions import Extensions
+from app.util.controller import JsonController, FileController, Controller
 
 MAX_MEDIA_ITEMS = 1
 CAPTION_FEILD_HEIGHT = 25
@@ -47,34 +55,13 @@ class NewPostFrame(tk.Frame):
         form_frame = FormFrame(scrollable_frame)
         form_frame.pack( pady=10, padx=10)
         
-
-class UploadTypeFrame(tk.Frame):
-    def __init__(self, container):
-        super().__init__(container)
-        style = BaseStyle()
-        self.config(
-            background=style.widget_background,
-            highlightbackground=style.background,
-            highlightcolor=style.background,
-            highlightthickness=5)
-        self.upload_frame:tk.Frame = None
-        
-    def set_post_type(self, post_type):
-        if self.upload_frame:
-            self.upload_frame.forget()
-        if post_type == "Select Post Type":
-            self.forget()
-        if post_type == "Image Post":
-            self.upload_frame = ImageUploadFrame(self)
-            self.upload_frame.pack()
-            self.pack()
-
 class FormFrame(tk.Frame):
     def __init__(self, container):
         super().__init__(container)
         style = BaseStyle()
         self.config(background=style.page_background)
-        upload_type_frame = UploadTypeFrame(self)
+        new_post_controller = NewPostController()
+        upload_type_frame = UploadMediaFrame(self, new_post_controller)
         header_frame = tk.Frame(self,
                                 highlightbackground=style.background,
                                 highlightcolor=style.background,
@@ -85,7 +72,7 @@ class FormFrame(tk.Frame):
         header_frame.pack(fill='x', pady=10)
         post_type_frame = PostTypeFrame(header_frame, upload_type_frame)
         post_type_frame.grid(row=0, column=0, padx=10, pady=10)
-        post_theme_frame = PostThemeFrame(header_frame)
+        post_theme_frame = PostThemeFrame(header_frame, new_post_controller)
         post_theme_frame.grid(row=0, column=1, padx=10, pady=10)
 
         body_frame = tk.Frame(self, background=style.widget_background)
@@ -95,11 +82,36 @@ class FormFrame(tk.Frame):
         post_caption_frame = PostCaptionFrame(body_frame)
         post_caption_frame.pack(fill="x", padx=10,pady=10)
 
+        upload_type_frame.pack(fill='x', expand=True,  pady=10)
+
+class UploadMediaFrame(BorderWidgetFrame):
+    def __init__(self, container, new_post_controller:NewPostController):
+        super().__init__(container)
+        self.upload_frame:tk.Frame = None
+        self.new_post_controller = new_post_controller
         
-        upload_type_frame.pack(fill='x', pady=10)
-        
+    def set_post_type(self, post_type):
+        if self.upload_frame:
+            self.upload_frame.forget()
+        if post_type == "Select Post Type":
+            self.forget()
+        if post_type == "Text Post":
+            self.upload_frame.forget()
+            self.new_post_controller._post_type = 'text'
+        if post_type == "Image Post":
+            self.upload_frame = ImageUploadFrame(self)
+            self.new_post_controller._post_type = 'image'
+        if post_type == "Video Post":
+            self.upload_frame = VideoUploadFrame(self)
+            self.new_post_controller._post_type = 'video'
+        if post_type == "Gallery Post":
+            self.upload_frame = GalleryUploadFrame(self)
+            self.new_post_controller._post_type = 'gallery'
+        self.upload_frame.pack()
+        self.pack()
+     
 class PostTypeFrame(tk.Frame):
-    def __init__(self, container, upload_type_frame: UploadTypeFrame):
+    def __init__(self, container, upload_type_frame: UploadMediaFrame):
         super().__init__(container)
         style = BaseStyle()
         self.upload_type_frame = upload_type_frame
@@ -108,7 +120,7 @@ class PostTypeFrame(tk.Frame):
         "The Post Type Determines what type of media is present in your post.\n" \
         "Use the Gallery Post to include multiple Images, Videos, or blocks of text")
         selectable_types = ["Select Post Type", "Text Post", "Image Post", "Video Post", "Gallery Post"]
-        label = Label(self, text="Post Type:", font_size = TEXT_FONT_SIZE)
+        label = WidgetLabel(self, text="Post Type:", font_size = TEXT_FONT_SIZE)
         label.pack(fill=tk.X, padx=5, pady=5, side="left")
         self.option_menu = OptionMenu(
             self,
@@ -126,16 +138,17 @@ class PostTypeFrame(tk.Frame):
 
 
 class PostThemeFrame(tk.Frame):
-    def __init__(self, container):
+    def __init__(self, container, new_post_controller:NewPostController):
         super().__init__(container)
         style = BaseStyle()
         self.config(background=style.widget_background)
+        self.new_post_controller = new_post_controller
         type_info = (
             "Select a Theme for your post. Themes html files can be modified for personal customization.\n"
             "Select the open button to view the selected theme")
         selectable_types = ["base.html"]
         print("TODO get list of available themes")
-        label = Label(self, text="Post Theme:", font_size = TEXT_FONT_SIZE)
+        label = WidgetLabel(self, text="Post Theme:", font_size = TEXT_FONT_SIZE)
         label.pack(fill=tk.X, padx=5, pady=5, side="left")
         option_menu = OptionMenu(
             self,
@@ -162,7 +175,7 @@ class PostTitleFrame(tk.Frame):
         super().__init__(container)
         header = tk.Frame(self)
         header.pack(fill='x')
-        label = Label(header, "Post Title:", TEXT_FONT_SIZE)
+        label = WidgetLabel(header, "Post Title:", TEXT_FONT_SIZE)
         label.pack(side='left')
         info_icon = InfoIconLight(header, "Enter Post Title. Title is limited to a single line.", INFO_ICON_SIZE)
         info_icon.pack(side='left', padx=3)
@@ -174,7 +187,7 @@ class PostCaptionFrame(tk.Frame):
         super().__init__(container)
         header = tk.Frame(self)
         header.pack(fill='x')
-        label = Label(header, "Post Caption:", TEXT_FONT_SIZE)
+        label = WidgetLabel(header, "Post Caption:", TEXT_FONT_SIZE)
         label.pack(side='left')
         info_icon = InfoIconLight(header, "Enter Post Caption. Can include multiple paragraphs", INFO_ICON_SIZE)
         info_icon.pack(side='left', padx=3)
@@ -184,8 +197,69 @@ class PostCaptionFrame(tk.Frame):
 class ImageUploadFrame(tk.Frame):
      def __init__(self, container):
         super().__init__(container)
-        test = Label(self, "hello")
-        test.pack()
+        filetypes = Extensions.get_tkinter_filetypes(True, False)
+        self.media_collection = MediaCollection(max_items=1)
+        media_entries_frame= MediaEntriesFrame(
+            self, 
+            self.media_collection)
+        upload_media_btn = UploadMediaBtn(
+            self, 
+            self.media_collection, 
+            media_entries_frame,
+            accepted_filetypes=filetypes,
+            entry_type="image")
+        upload_media_btn.pack(padx=10, pady=10, fill="x")
+        media_entries_frame.pack()
+
+class VideoUploadFrame(tk.Frame):
+    def __init__(self, container):
+        super().__init__(container)
+        filetypes = Extensions.get_tkinter_filetypes(False, True)
+        self.media_collection = MediaCollection(max_items=1)
+        media_entries_frame= MediaEntriesFrame(
+            self, 
+            self.media_collection)
+        upload_media_btn = UploadMediaBtn(
+            self, 
+            self.media_collection, 
+            media_entries_frame,
+            accepted_filetypes=filetypes,
+            entry_type="video")
+        upload_media_btn.pack(padx=10, pady=10, fill="x")
+        media_entries_frame.pack()
+
+class GalleryUploadFrame(tk.Frame):
+    def __init__(self, container):
+        super().__init__(container)
+        image_filetypes = Extensions.get_tkinter_filetypes(True, False)
+        video_filetypes = Extensions.get_tkinter_filetypes(False, True)
+        btn_frame = WidgetFrame(self)
+        btn_frame.pack()
+        self.media_collection = MediaCollection()
+        media_entries_frame= MediaEntriesFrame(
+            self, 
+            self.media_collection)
+        upload_image_btn = UploadMediaBtn(
+            btn_frame, 
+            self.media_collection, 
+            media_entries_frame,
+            accepted_filetypes= image_filetypes,
+            entry_type="image")
+        upload_image_btn.pack(padx=10, pady=10, fill="x",expand=True, side='left')
+        upload_video_btn = UploadMediaBtn(
+            btn_frame, 
+            self.media_collection, 
+            media_entries_frame,
+            accepted_filetypes=video_filetypes,
+            entry_type="video")
+        upload_video_btn.pack(padx=10, pady=10, fill="x",expand=True, side="left")
+        upload_text_btn= UploadMediaBtn(
+            btn_frame, 
+            self.media_collection, 
+            media_entries_frame,
+            entry_type="text")
+        upload_text_btn.pack(padx=10, pady=10, fill="x", expand=True, side='left')
+        media_entries_frame.pack()
 
 class NewPost(tk.Frame):
     def __init__(self, container, main_window):
@@ -216,11 +290,11 @@ class NewPost(tk.Frame):
             #BODY LEFT
         body_left_frame = tk.Frame(self.body_frame, bg=C2)
         body_left_frame.grid(column=0, row=0, sticky=tk.NSEW, ipadx=5, ipady=5, padx=10,pady=10)
-        media_list= MediaList(
+        media_list= MediaEntriesFrame(
             body_left_frame, 
             self.media, 
             self.tk_images)
-        get_media_btn = GetMediaBtn(
+        get_media_btn = UploadMediaBtn(
             body_left_frame, 
             self.media, 
             self.tk_images, 

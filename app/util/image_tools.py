@@ -11,3 +11,10 @@ def load_icon(name: str, height: int) -> ImageTk.PhotoImage:
 
     resized_img = img.resize((target_width, height), Image.LANCZOS)
     return ImageTk.PhotoImage(resized_img)
+
+def path_to_tk_image(file_path, max_width, max_height):
+    img = Image.open(file_path)
+    img.thumbnail((max_width, max_height), Image.LANCZOS)
+    photo = ImageTk.PhotoImage(img)
+    return photo
+

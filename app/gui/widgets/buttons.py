@@ -11,8 +11,17 @@ class Button(tk.Button):
                          text=text,
                          background=self.style.background,
                          activebackground=self.style.pressed,
-                         font=(self.style.font_family, fontsize))
+                         font=(self.style.font_family, fontsize),
+                        foreground= self.style.foreground)
+        self.bind("<Enter>", self.on_enter)
+        self.bind("<Leave>", self.on_leave)
 
+    def on_enter(self, e):
+        self.config(bg=self.style.activebackground)
+
+    def on_leave(self,e):
+        self.config(bg=self.style.background)
+        
 class OpenButton(tk.Button):
     def __init__(self, master, command, height = 20, text=None, **kwargs):
         self.command = command

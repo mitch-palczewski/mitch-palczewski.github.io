@@ -12,7 +12,7 @@ from app.util.controller import JsonController
 from app.util.serve_localhost import start_server
 from app.gui.tutorial.tutorial_window import init_tutorial
 from .subwindows.landing import Landing
-from .subwindows.new_post import NewPost, NewPostFrame
+from .windows.new_post.new_post_window import NewPost, NewPostFrame
 from .subwindows.configure_website import ConfigureWebsite
 from .subwindows.edit_posts import EditPosts
 

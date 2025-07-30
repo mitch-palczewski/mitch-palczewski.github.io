@@ -4,7 +4,7 @@ from app.gui.styles import BaseStyle
 from screeninfo import get_monitors
 
 
-class Label(tk.Label):
+class WidgetLabel(tk.Label):
     def __init__(self, master, text, font_size = 12, **kwargs):
         self.style = BaseStyle(font_size=font_size)
         super().__init__(

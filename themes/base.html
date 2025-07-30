@@ -83,12 +83,12 @@
         data-post_id=""
         data-type="image_post"
       >
-        <div class="flex items-start gap-4">
-          <div class="max-w-2/3">
+        <div class="flex flex-col md:flex-row md:items-start gap-4">
+          <div class="max-w-1/2 max-w-2/3">
             <img
               src="https://lipsum.app/random/500x500"
               alt="Description"
-              class="max-h-[66vh] border-gray-600"
+              class="max-h-[66vh] border-gray-600 m-auto"
               data-type="image"
             />
           </div>
@@ -177,6 +177,8 @@
         Customization: 
           Modify <div class="grid grid-cols-3 gap-4" data-type="gallery"> to change the number of columns 
           and the gap between them.
+          Modify <div class="grid grid-cols-2 md:grid-cols-3 gap-4 [grid-auto-flow:dense]" data-type="gallery"> 
+          to autofill gaps. 
       ----------------------------------------------------------------------------->
       <div
         class="bg-black border border-gray-700 rounded-none p-4 w-full lg:w-2/3 mx-auto"
@@ -189,7 +191,7 @@
           </h2>
           <span class="text-gray-400 text-sm" data-type="date">2024-06-10</span>
         </div>
-        <div class="grid grid-cols-3 gap-4 [grid-auto-flow:dense]" data-type="gallery">
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-4" data-type="gallery">
           <img
             src="https://lipsum.app/random/600x500"
             alt="Image"
