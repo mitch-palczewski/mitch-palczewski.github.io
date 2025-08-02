@@ -23,10 +23,7 @@
   </header>
   <!--END-->
   <body class="bg-gray-100 text-gray-900">
-    <div
-      class="grid gap-6 grid-cols-1 md:grid-cols-1 lg:grid-cols-1 p-3"
-      id="posts"
-    >
+    <div class="grid gap-6 grid-cols-1 md:grid-cols-1 lg:grid-cols-1 p-3">
       <!--Text Post-----------------------------------------------------------------
 
         Required tags:
@@ -54,18 +51,21 @@
             class="pr-3 text-yellow-400 hover:text-yellow-600 hover:underline transition-colors"
             href="https://lipsum.app/random/500x500"
             data-type="link"
+            target="_blank"
             >Link 1</a
           >
           <a
             class="pr-3 text-yellow-400 hover:text-yellow-600 hover:underline transition-colors"
             href="https://lipsum.app/random/500x500"
             data-type="link"
+            target="_blank"
             >Link 2</a
           >
           <a
             class="pr-3 text-yellow-400 hover:text-yellow-600 hover:underline transition-colors"
             href="https://lipsum.app/random/500x500"
             data-type="link"
+            target="_blank"
             >Link 3</a
           >
         </div>
@@ -90,6 +90,7 @@
               alt="Description"
               class="max-h-[66vh] border-gray-600 m-auto"
               data-type="image"
+              loading="lazy"
             />
           </div>
           <div class="flex-1">
@@ -110,6 +111,7 @@
                 class="text-yellow-400 hover:text-yellow-600 hover:underline transition-colors"
                 href="https://lipsum.app/random/500x500"
                 data-type="link"
+                target="_blank"
                 >Link 1</a
               >
             </div>
@@ -138,30 +140,35 @@
 
         <video
           controls
-          class="w-full m-auto border border-gray-600 rounded-none"
+          class="w-auto max-h-[66vh] m-auto border border-gray-600 rounded-none"
           data-type="video"
         >
           <source src="video.mp4" type="video/mp4" data-type="video_source" />
           Your browser does not support the video tag.
         </video>
-        <p class="text-white">A brief caption describing the video content.</p>
+        <p class="text-white" data-type="caption">
+          A brief caption describing the video content.
+        </p>
         <div class="flex justify-start flex-wrap" data-type="link_container">
           <a
             class="pr-3 text-yellow-400 hover:text-yellow-600 hover:underline transition-colors"
             href="https://lipsum.app/random/500x500"
             data-type="link"
+            target="_blank"
             >Link 1</a
           >
           <a
             class="pr-3 text-yellow-400 hover:text-yellow-600 hover:underline transition-colors"
             href="https://lipsum.app/random/500x500"
             data-type="link"
+            target="_blank"
             >Link 2</a
           >
           <a
             class="pr-3 text-yellow-400 hover:text-yellow-600 hover:underline transition-colors"
             href="https://lipsum.app/random/500x500"
             data-type="link"
+            target="_blank"
             >Link 3</a
           >
         </div>
@@ -197,11 +204,12 @@
             alt="Image"
             class="object-cover border bg-[#2E2E2C] border-gray-600 rounded-none max-h-[50vh] mx-auto block"
             data-type="image"
+            loading="lazy"
           />
 
           <video
             controls
-            class="border border-gray-600 rounded-none col-span-2 w-full"
+            class="border border-gray-600 rounded-none col-span-2 w-auto max-h-[50vh]"
             data-type="video"
           >
             <source
@@ -210,6 +218,7 @@
               data-type="video_source"
             />
           </video>
+
           <p
             class="text-white bg-[#2E2E2C] p-2 p-auto border border-gray-600 block"
             data-type="text"
@@ -217,15 +226,18 @@
             This is a text element in a gallery post. <br />
             Lorem ipsum dolor sit amet, consectetur adipiscing elit.
           </p>
+
           <img
-            src="https://lipsum.app/random/300x800"
+            src="https://lipsum.app/random/600x500"
             alt="Image"
-            class="object-cover border border-gray-600 rounded-none max-h-[50vh] mx-auto block"
+            class="object-cover border bg-[#2E2E2C] border-gray-600 rounded-none max-h-[50vh] mx-auto block"
             data-type="image"
+            loading="lazy"
           />
+
           <video
             controls
-            class="border border-gray-600 rounded-none col-span-2 w-full"
+            class="border border-gray-600 rounded-none col-span-2 w-auto max-h-[50vh]"
             data-type="video"
           >
             <source
@@ -234,6 +246,7 @@
               data-type="video_source"
             />
           </video>
+
           <p
             class="text-white bg-[#2E2E2C] p-2 p-auto border border-gray-600 block"
             data-type="text"
@@ -241,6 +254,7 @@
             This is a text element in a gallery post. <br />
             Lorem ipsum dolor sit amet, consectetur adipiscing elit.
           </p>
+          
         </div>
         <p class="mt-4 text-white" data-type="caption">
           Here’s a caption that describes the collection above, giving context
@@ -251,18 +265,21 @@
             class="pr-3 text-yellow-400 hover:text-yellow-600 hover:underline transition-colors"
             href="https://lipsum.app/random/500x500"
             data-type="link"
+            target="_blank"
             >Link 1</a
           >
           <a
             class="pr-3 text-yellow-400 hover:text-yellow-600 hover:underline transition-colors"
             href="https://lipsum.app/random/500x500"
             data-type="link"
+            target="_blank"
             >Link 2</a
           >
           <a
             class="pr-3 text-yellow-400 hover:text-yellow-600 hover:underline transition-colors"
             href="https://lipsum.app/random/500x500"
             data-type="link"
+            target="_blank"
             >Link 3</a
           >
         </div>

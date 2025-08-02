@@ -4,7 +4,7 @@ from app.gui.styles import BaseStyle
 from app.util.image_tools import load_icon
 
 class Button(tk.Button):
-    def __init__(self, master, command, text, fontsize=12):
+    def __init__(self, master, command, text, fontsize=12, width = None):
         self.style = BaseStyle()
         super().__init__(master, 
                          command=command, 
@@ -13,6 +13,8 @@ class Button(tk.Button):
                          activebackground=self.style.pressed,
                          font=(self.style.font_family, fontsize),
                         foreground= self.style.foreground)
+        if width:
+            self.config(width=width)
         self.bind("<Enter>", self.on_enter)
         self.bind("<Leave>", self.on_leave)
 

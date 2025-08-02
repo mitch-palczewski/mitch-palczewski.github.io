@@ -41,7 +41,7 @@ class Theme:
         if self._footer_html == None:
             self._footer_html = self.master_html.find("footer")
             if not self._footer_html:
-                Warning(f"Did not find <footer> tag in theme {self.html_path}")
+                print(f"WARNING: Did not find <footer> tag in theme {self.html_path}")
         return self._footer_html 
     
     @property 
@@ -49,7 +49,7 @@ class Theme:
         if self._text_post_html == None:
             self._text_post_html = self.master_html.find("div", attrs={"data-type": "text_post"})
             if not self._text_post_html:
-                Warning(f"Did not find <div data-type='text_post'> tag in theme {self.html_path}")
+                print(f"WARNING: Did not find <div data-type='text_post'> tag in theme {self.html_path}")
         return self._text_post_html 
     
     @property 
@@ -57,7 +57,7 @@ class Theme:
         if self._image_post_html == None:
             self._image_post_html = self.master_html.find("div", attrs={"data-type": "image_post"})
             if not self._image_post_html:
-                Warning(f"Did not find <div data-type='image_post'> tag in theme {self.html_path}")
+                print(f"WARNING: Did not find <div data-type='image_post'> tag in theme {self.html_path}")
         return self._image_post_html 
     
     @property 
@@ -65,7 +65,7 @@ class Theme:
         if self._video_post_html == None:
             self._video_post_html = self.master_html.find("div", attrs={"data-type": "video_post"})
             if not self._video_post_html:
-                Warning(f"Did not find <div data-type='video_post'> tag in theme {self.html_path}")
+                print(f"WARNING: Did not find <div data-type='video_post'> tag in theme {self.html_path}")
         return self._video_post_html 
     
     @property 
@@ -73,7 +73,7 @@ class Theme:
         if self._gallery_post_html == None:
             self._gallery_post_html = self.master_html.find("div", attrs={"data-type": "gallery_post"})
             if not self._gallery_post_html:
-                Warning(f"Did not find <div data-type='gallery_post'> tag in theme {self.html_path}")
+                print(f"Did not find <div data-type='gallery_post'> tag in theme {self.html_path}")
         return self._gallery_post_html 
 
     def new(name:str):

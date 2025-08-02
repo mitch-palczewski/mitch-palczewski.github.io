@@ -41,6 +41,9 @@ class Text(tk.Text):
         )
     def get_all(self):
         return self.get("1.0", "end-1c")
+    
+    def insert_begining(self, text):
+        self.insert("1.0", text)
 
 class Entry(tk.Entry):
     def __init__(self,

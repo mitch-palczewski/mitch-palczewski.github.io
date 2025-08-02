@@ -3,41 +3,26 @@ from tkinter import filedialog as fd
 from tkinter.messagebox import showinfo
 import os
 from PIL import Image, ImageTk
-from dataclasses import dataclass
-
 
 
 from app.gui.styles import BaseStyle
 from app.gui.widgets.buttons import Button
 from app.gui.widgets.text import Text
 from app.gui.widgets.frames import WidgetFrame
-from app.gui.widgets.labels import WidgetLabel
+from app.gui.widgets.labels import WidgetLabel, InfoIcon
 
 from app.gui.windows.new_post.build_post import BuildPostButton
 
 from app.util.controller import JsonController
-from app.util.controllers.extensions import Extensions
+from app.util.extensions import Extensions, VALID_HTML_IMAGE_EXTENSIONS, VALID_HTML_VIDEO_EXTENSIONS
+from app.util.models.media import MediaObj, MediaCollection
+from app.util.controllers.post_controller import PostController
 
 MAX_IMG_HEIGHT = 600
 MAX_IMG_WIDTH = 700
 
-@dataclass
-class Media:
-    entry_type:str = None
-    file_path:str = None
-    tk_photoimage:str = None
-    text:str = None
-    text_obj:Text = None
-    delete:bool = False
-
-class MediaCollection:
-    def __init__(self, max_items:int = None):
-        self.max_entries = max_items
-        self.entries = []
-        self.tk_entries = []
-
 class ImageEntryFrame(WidgetFrame):
-    def __init__(self, container:tk.Frame, media:Media):
+    def __init__(self, container:tk.Frame, media:MediaObj):
         super().__init__(container)
         self.style = BaseStyle()
         self.media = media
@@ -60,7 +45,7 @@ class ImageEntryFrame(WidgetFrame):
         self.pack_forget()
 
 class VideoEntryFrame(WidgetFrame):
-    def __init__(self, container:tk.Frame, media:Media):
+    def __init__(self, container:tk.Frame, media:MediaObj):
         super().__init__(container)
         self.style = BaseStyle()
         self.media = media
@@ -85,18 +70,19 @@ class VideoEntryFrame(WidgetFrame):
         self.pack_forget()
         
 class TextEntryFrame(WidgetFrame):
-    def __init__(self, container:tk.Frame, media:Media):
+    def __init__(self, container:tk.Frame, media:MediaObj):
         super().__init__(container)
         self.style = BaseStyle()
         self.media = media
-        self.container = container
-        
         self.columnconfigure(0, weight=4)
         self.columnconfigure(1, weight=1)
-        self.pack(fill='x', expand=True)
+        self.pack(fill='x', expand=True, pady=5)
         text_entry = Text(self)
         media.text_obj = text_entry
         text_entry.grid(column=0,row=0)
+        text = self.media.text
+        if text:
+            text_entry.insert_begining(text)
         x_btn = Button(
             self, 
             text="x", 
@@ -110,7 +96,7 @@ class TextEntryFrame(WidgetFrame):
         
 
 class MediaEntriesFrame(tk.Frame):
-    def __init__(self, container:tk.Frame, media_collection:MediaCollection):
+    def __init__(self, container:tk.Frame, media_collection:MediaCollection, post_controller: PostController):
         super().__init__(container)
         self.style = BaseStyle()
         self.config(background=self.style.widget_background)
@@ -118,15 +104,16 @@ class MediaEntriesFrame(tk.Frame):
         self.tk_entries = media_collection.tk_entries
         self.media_content = tk.Frame(self, bg=self.style.widget_background, width=MAX_IMG_WIDTH+20)
         self.media_content.pack(fill='both',padx=10, pady=10)
-        self.build_btn = BuildPostButton(self)
+        self.build_btn = BuildPostButton(self, post_controller)
         self.build_btn_packed = False
 
     def update(self):
+        self.get_text_from_text_entrys()
         self.media_content.destroy()
         self.media_content = tk.Frame(self, bg=self.style.widget_background, width=MAX_IMG_WIDTH+20)
         self.media_content.pack(fill='both', padx=10, pady=10)
         for entry in self.entries:
-            if isinstance(entry, Media):
+            if isinstance(entry, MediaObj):
                 if entry.delete:
                     self.entries.remove(entry)
                     continue
@@ -146,39 +133,50 @@ class MediaEntriesFrame(tk.Frame):
 
     def pack_build_post_btn(self):
         if not self.build_btn_packed:
-            self.build_btn.pack(side='bottom')
+            self.build_btn.pack(side='bottom', fill='x', expand=True)
     
     def forget_build_post_btn(self):
         self.build_btn.pack_forget()
-        
-    def remove_media_element(self, index):
-        del self.entries[index]
-        del self.tk_entries[index]
-        self.update()
+
+    def get_text_from_text_entrys(self):
+        for entry in self.entries:
+            if not isinstance(entry, MediaObj):
+                continue
+            if entry.entry_type == 'text' and entry.text_obj:
+                entry.text = entry.text_obj.get_all()
+
+
 
 
 
 class UploadMediaBtn(tk.Frame):
-    def __init__(self, container:tk.Frame, media:MediaCollection, media_entries_frame: MediaEntriesFrame, entry_type:str, accepted_filetypes:tuple = None):
+    def __init__(self, container:tk.Frame, media_collection:MediaCollection, media_entries_frame: MediaEntriesFrame, entry_type:str, accepted_filetypes:tuple = None):
         super().__init__(container)
-        self.entries:list = media.entries
-        self.tk_entries:list = media.tk_entries
+        self.entries:list = media_collection.entries
+        self.tk_entries:list = media_collection.tk_entries
         self.accepted_filetypes:tuple = accepted_filetypes
         self.media_entries_frame: MediaEntriesFrame = media_entries_frame
-        self.max_entries = media.max_entries
-        btn = Button(self, command=self.get_media, text="Upload")
+        self.max_entries = media_collection.max_entries
+        self.frame = WidgetFrame(self)
+        self.frame.pack(fill="x", expand=True)
+        info_icon = None
+        btn = Button(self.frame, command=self.add_new_media_entry, text="Upload", width=20)
         if entry_type == "image":
             btn.config(text="Upload Image",
-                       command=self.get_media)
+                       command=self.add_new_media_entry)
+            info_icon = InfoIcon(self.frame, f"Upload a image with extension: \n {VALID_HTML_IMAGE_EXTENSIONS}")
         elif entry_type == "video":
             btn.config(text="Upload Video",
-                       command=self.get_media)
+                       command=self.add_new_media_entry)
+            info_icon = InfoIcon(self.frame, f"Perfered Video extension is mp4 but accepted are: \n {VALID_HTML_VIDEO_EXTENSIONS}")
         elif entry_type == "text":
             btn.config(text="Add Text",
                        command=self.make_text_obj)
-        btn.pack(fill="x")
+        btn.pack(fill="x", expand=True, side='left')
+        if info_icon:
+            info_icon.pack(side='left',padx=3)
     
-    def get_media(self):
+    def add_new_media_entry(self):
         if entries_maxed(self.entries, self.max_entries):
             self.media_entries_frame.forget_build_post_btn()
             return
@@ -189,7 +187,7 @@ class UploadMediaBtn(tk.Frame):
         )
         if not file_path:
             return
-        new_entry = Media()
+        new_entry = MediaObj()
         if Extensions.is_valid_html_image(file_path):
             new_entry.entry_type = 'image' 
             new_entry.file_path = file_path
@@ -204,7 +202,7 @@ class UploadMediaBtn(tk.Frame):
         self.media_entries_frame.pack_build_post_btn()
     
     def make_text_obj(self):
-        new_entry = Media()
+        new_entry = MediaObj()
         new_entry.entry_type = "text"
         self.entries.append(new_entry)
         self.media_entries_frame.update()
@@ -213,12 +211,12 @@ class UploadMediaBtn(tk.Frame):
 def entries_maxed(entries, max_entries):
     count = 0 
     for entry in entries:
-        if isinstance(entry, Media):
+        if isinstance(entry, MediaObj):
             if not entry.delete:
                 count += 1
         else:
             ValueError(entry, "Entry is not instance of Media")
-    if count >= max_entries:
+    if max_entries and count >= max_entries:
         showinfo(title="Media Maxed",
                      message=f"Max of {max_entries} Entries")
         return True
