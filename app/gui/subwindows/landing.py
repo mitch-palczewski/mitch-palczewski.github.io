@@ -55,16 +55,16 @@ class Landing(tk.Frame):
         )
         configure_post_btn.pack(padx=BUTTON_PADDING, pady=BUTTON_PADDING)
 
-        edit_post_btn = tk.Button(
-            self.body,
-            text="Edit Posts",
-            command=lambda: main_window.load_content("EditPosts"),
-            width=BUTTON_WIDTH,
-            height=BUTTON_HEIGHT,
-            font=FONT_MD,
-            bg='white'
-        )
-        edit_post_btn.pack(padx=BUTTON_PADDING, pady=BUTTON_PADDING)
+        #edit_post_btn = tk.Button(
+        #    self.body,
+        #    text="Edit Posts",
+        #    command=lambda: main_window.load_content("EditPosts"),
+        #    width=BUTTON_WIDTH,
+        #    height=BUTTON_HEIGHT,
+        #    font=FONT_MD,
+        #    bg='white'
+        #)
+        #edit_post_btn.pack(padx=BUTTON_PADDING, pady=BUTTON_PADDING)
 
         
 

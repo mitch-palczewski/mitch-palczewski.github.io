@@ -51,9 +51,6 @@ class MainWindow(tk.Tk):
         self.load_content("Landing")
         #init_tutorial(self)
 
-    
-
-
     def new_content_frame(self):
         if self.body_content:
             self.body_content.destroy()

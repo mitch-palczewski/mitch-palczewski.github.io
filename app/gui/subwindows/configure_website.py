@@ -8,10 +8,6 @@ except ImportError:
     pass
 
 from app.gui.subwindows.configure_windows.general_config import GeneralConfig
-from app.gui.subwindows.configure_windows.config_post import ConfigPost
-from app.gui.subwindows.configure_windows.config_header import ConfigHeader
-from app.gui.subwindows.configure_windows.config_footer import ConfigFooter
-from app.gui.subwindows.configure_windows.config_site import ConfigSite
 from app.util.controller import JsonController
 colors = JsonController.get_config_data("colors")
 C1 = colors["c1"]
@@ -48,30 +44,8 @@ class ConfigureWebsite(tk.Frame):
             font=FONT_SM
         )
         self.general_config_btn.grid(column=0, row=0, sticky=tk.EW, padx=btn_padx, pady=btn_pady)
-        self.config_post_btn = tk.Button(
-            header_frame, 
-            text="Configure Post", 
-            command=lambda:self.load_content("ConfigPost"),
-            bg="white",
-            font=FONT_SM
-        )
-        self.config_post_btn.grid(column=1, row=0, sticky=tk.EW, padx=btn_padx, pady=btn_pady)
-        self.config_header_btn = tk.Button(
-            header_frame, 
-            text="Configure Header", 
-            command=lambda:self.load_content("ConfigHeader"),
-            bg="white",
-            font=FONT_SM
-        )
-        self.config_header_btn.grid(column=2, row=0, sticky=tk.EW, padx=btn_padx, pady=btn_pady)
-        self.config_footer_btn = tk.Button(
-            header_frame, 
-            text="Configure Footer", 
-            command=lambda:self.load_content("ConfigFooter"),
-            bg="white",
-            font=FONT_SM
-        )
-        self.config_footer_btn.grid(column=3, row=0, sticky=tk.EW, padx=btn_padx, pady=btn_pady)
+        
+        
 
         
         #BODY
@@ -84,10 +58,6 @@ class ConfigureWebsite(tk.Frame):
 
     def set_btns_color(self, color):
         self.general_config_btn.config(bg=color)
-       
-        self.config_post_btn.config(bg=color)
-        self.config_header_btn.config(bg=color)
-        self.config_footer_btn.config(bg=color)
         
     def new_content_frame(self):
         if self.body_content:
@@ -97,7 +67,7 @@ class ConfigureWebsite(tk.Frame):
 
     def load_content(self, content:str):
         """
-        Accepts content: "GeneralConfig", "ConfigPost", "ConfigSite"
+        Accepts content: "GeneralConfig", 
         """
         self.set_btns_color(C5)
         self.new_content_frame()
@@ -106,21 +76,6 @@ class ConfigureWebsite(tk.Frame):
             general_config = GeneralConfig(self.body_content)
             general_config.pack(fill='both', expand= True)
             self.general_config_btn.config(bg=C4)
-            return
-        if content == "ConfigPost":
-            config_post = ConfigPost(self.body_content)
-            config_post.pack(fill='both', expand= True)
-            self.config_post_btn.config(bg=C4)
-            return
-        if content == "ConfigHeader":
-            config_header = ConfigHeader(self.body_content)
-            config_header.pack(fill='both', expand= True)
-            self.config_header_btn.config(bg=C4)
-            return
-        if content == "ConfigFooter":
-            config_footer = ConfigFooter(self.body_content)
-            config_footer.pack(fill='both', expand= True)
-            self.config_footer_btn.config(bg=C4)
             return
         print(f"{content} is not set up")
         

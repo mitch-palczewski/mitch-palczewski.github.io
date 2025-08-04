@@ -4,7 +4,7 @@
     "base_link": "https://baselink.com",
     "github_repo_url": "",
     "tab_title": "temp-username",
-    "auto_push_git": true,
+    "auto_push_git": false,
     "grid_cols": {
         "sm": "1",
         "md": "2",
