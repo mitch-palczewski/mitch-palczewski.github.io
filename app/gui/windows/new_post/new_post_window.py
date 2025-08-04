@@ -31,6 +31,7 @@ from app.gui.windows.new_post.get_links import AddLinkBtn, LinkCollection, LinkE
 
 from app.util.extensions import Extensions
 from app.util.controller import JsonController, FileController, Controller
+from app.util.controllers.theme_controller import ThemePaths
 
 MAX_MEDIA_ITEMS = 1
 CAPTION_FEILD_HEIGHT = 25
@@ -167,30 +168,30 @@ class PostThemeFrame(tk.Frame):
         type_info = (
             "Select a Theme for your post. Themes html files can be modified for personal customization.\n"
             "Select the open button to view the selected theme")
-        selectable_types = ["base.html"]
+        selectable_types = ThemePaths.get_basenames()
         print("TODO get list of available themes")
         label = WidgetLabel(self, text="Post Theme:", font_size = TEXT_FONT_SIZE)
         label.pack(fill=tk.X, padx=5, pady=5, side="left")
-        option_menu = OptionMenu(
+        self.option_menu = OptionMenu(
             self,
             selectable_types[0],
             selectable_types,
             self.on_select,
             15
         )
-        option_menu.pack(side="left")
+        self.option_menu.pack(side="left")
         test = OpenButton(self , self.open_theme, height=OPEN_BUTTON_SIZE)
         test.pack(side="left", padx=3)
         info = InfoIcon(self, type_info, INFO_ICON_SIZE)
         info.pack(side="left")
-        
             
-    def on_select(self):
-        
-        pass
+    def on_select(self, selected_value):  
+        self.post_controller.theme_path = ThemePaths.get_path(selected_value)
 
     def open_theme(self):
-        pass
+        selected_value = self.option_menu.selected_value
+        local_path = ThemePaths.get_local_path(selected_value)
+        Controller.open_html_with_local_host(local_path)
 
 class PostTitleFrame(tk.Frame):
     def __init__(self, container, post_controller: PostController):

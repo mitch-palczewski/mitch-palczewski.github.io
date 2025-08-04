@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import filedialog as fd
-from tkinter.messagebox import showinfo
+from tkinter.messagebox import showinfo, askyesno
 import os
 from PIL import Image, ImageTk
 
@@ -194,7 +194,16 @@ class UploadMediaBtn(tk.Frame):
             new_entry.tk_photoimage = path_to_tk_image(file_path)
             self.entries.append(new_entry)
             self.media_entries_frame.update()
-        if Extensions.is_valid_html_video(file_path): 
+        if Extensions.is_valid_html_video(file_path):
+            file_mb = os.path.getsize(file_path)/ (1024 * 1024)
+            if file_mb > 10 :
+                answer = askyesno(
+                    "Video over 10mb", 
+                    "The video you selected is greater then 10mb. " \
+                    "\n Github does not allow videos of size greater then 10mb" \
+                    "\n Would you like to continue")
+                if not answer:
+                    return
             new_entry.entry_type = 'video'
             new_entry.file_path = file_path
             self.entries.append(new_entry)

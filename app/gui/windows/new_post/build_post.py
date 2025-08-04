@@ -58,6 +58,7 @@ class BuildPostButton(WidgetFrame):
             JsonController.set_posts_data(new_post_data)
 
     def after_post_built(self):
+        Controller.web_page_change()
         PostBuiltPopUp(self.post_controller.main_window.body_frame, self.post_controller)
 
 class PostBuiltPopUp(tk.Toplevel):

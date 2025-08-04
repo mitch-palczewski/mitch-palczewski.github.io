@@ -8,8 +8,7 @@ except ImportError:
     print("Error: windll not imported. Text may be blurred")
     pass
 
-from app.util.controller import JsonController
-from app.util.serve_localhost import start_server
+from app.util.controller import JsonController, Controller
 
 BUTTON_WIDTH = 25
 BUTTON_HEIGHT = 2
@@ -75,7 +74,7 @@ class Landing(tk.Frame):
         test_webpage_btn = tk.Button(
             self.body,
             text="Test With Local Host",
-            command= start_server,
+            command= Controller.open_index_html_local_host,
             width=25,
             height=BUTTON_HEIGHT,
             font=FONT_MD,

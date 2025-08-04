@@ -5,7 +5,7 @@ from app.util.models.link import LinkCollection
 class PostController:
     def __init__(self):
         self._post_type:str = None
-        self.theme_selector = None
+        self.theme_path = None
         self.title_entry:Entry = None
         self.caption_entry:ScrollText = None
         self._media_collection:MediaCollection = None

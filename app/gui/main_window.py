@@ -8,8 +8,8 @@ except ImportError:
    
     pass
 
-from app.util.controller import JsonController
-from app.util.serve_localhost import start_server
+from app.util.controller import JsonController, Controller
+from app.util.serve_localhost import LocalHTTPServer
 from app.gui.tutorial.tutorial_window import init_tutorial
 from .subwindows.landing import Landing
 from .windows.new_post.new_post_window import  NewPostFrame
@@ -75,7 +75,7 @@ class MainWindow(tk.Tk):
         self.test_btn = tk.Button(
             self.header_frame, 
             text="Test With Local Host", 
-            command=start_server,
+            command=Controller.open_index_html_local_host,
             font=FONT_SM,
             bg=C4)
         self.test_btn.place(relx=0.0, x=20, y=20, anchor="nw") 

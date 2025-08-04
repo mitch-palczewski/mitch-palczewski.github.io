@@ -5,7 +5,7 @@ from tkinter.messagebox import showwarning
 
 from app.util.model import Model, HtmlModel, StringModel, JsonModel, FileModel
 from app.util.git_integration import push_git
-from app.util.serve_localhost import start_server
+from app.util.serve_localhost import LocalHTTPServer
 from app.config import get_resource_paths
 
 RESOURCE_PATHS = get_resource_paths()
@@ -55,8 +55,19 @@ class Controller:
     @staticmethod
     def web_page_change():
         Controller.push_to_git()
-        start_server()
-    
+        server = LocalHTTPServer(port=8080, html_file="index.html")
+        server.start()
+
+
+    @staticmethod
+    def open_html_with_local_host(html_file):
+        server = LocalHTTPServer(port=8080, html_file=html_file)
+        server.start()
+
+    @staticmethod
+    def open_index_html_local_host():
+        Controller.open_html_with_local_host('index.html')
+
     @staticmethod
     def push_to_git():
         auto_push_git = JsonController.get_config_data("auto_push_git")
@@ -503,7 +514,7 @@ class FileController:
     def get_post_component_basenames()->list:
         basenames = os.listdir(HTML_POST_FOLDER)
         return basenames
-    
+
     @staticmethod
     def get_post_component_paths() -> list:
         basenames = FileController.get_post_component_basenames()

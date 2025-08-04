@@ -1,11 +1,10 @@
 {
     "post_component": "C:\\Users\\mpalc\\OneDrive\\Desktop\\_projects\\website-generator-workspace\\website-generator\\html_components\\post\\default.html",
-    "post_messaging": false,
     "email": " ",
     "base_link": "https://baselink.com",
     "github_repo_url": "",
     "tab_title": "temp-username",
-    "auto_push_git": false,
+    "auto_push_git": true,
     "grid_cols": {
         "sm": "1",
         "md": "2",
