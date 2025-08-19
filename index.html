@@ -2,158 +2,35 @@
 
 <html lang="en">
 <head>
-<link href="assets\Screenshot 2024-12-01 164529.png" rel="icon" type="image/png"/>
+<link href="assets\Screenshot (2)2.png" rel="icon" type="image/png"/>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<title>Mitch Scrapbook</title>
-<link href="styles.css" rel="stylesheet"/>
-<script src="https://cdn.tailwindcss.com">
-</script>
+<title>temp-username1</title>
+<script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="flex flex-col min-h-screen">
-<header class="bg-gradient-to-r from-[#e0e4f8] to-[#7890f8] p-12">
-<div class="max-w-5xl mx-auto text-center">
-<h1 class="text-5xl font-serif font-bold text-white">
-   Mitch Palczewski's Scrapbook
-  </h1>
-<p class="mt-4 text-xl text-white opacity-90">
-   Posting various things with my website generator
-  </p>
-</div>
+<body>
+<header class="bg-black border-b border-gray-700 rounded-none p-4 w-full mx-auto flex items-center justify-between">
+<h1 class="text-white text-2xl font-semibold">My Blog</h1>
+<nav class="space-x-4">
+<a class="text-gray-400 hover:text-yellow-600" href="#home">Home</a>
+<a class="text-gray-400 hover:text-yellow-600" href="#posts">Posts</a>
+<a class="text-gray-400 hover:text-yellow-600" href="#about">About</a>
+<a class="text-gray-400 hover:text-yellow-600" href="#contact">Contact</a>
+</nav>
 </header>
-<main class="flex-1 p-4 bg-[#4f98f2]">
-<!--vvv Grid div-->
-<div class="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3" id="posts"><div class="bg-gray-200 p-2 shadow relative lg:col-span-1" data-post_id="000011" data-type="post" id="post_id">
-<div class="grid grid-cols-2">
-<h1 class="text-2xl font-bold text-gray-800" data-type="title" id="title">asdas</h1>
-<h6 class="text-right" data-type="date" id="date">08-15-2025</h6>
+<main class="flex-1 p-4 text-gray-900 bg-[#59e8dd]">
+<!--<div> bellow is the Post Container Begin-->
+<div class="grid gap-6 grid-cols-1 md:grid-cols-1 lg:grid-cols-1" data-type="posts_container">
 </div>
-
-<div class="bg-gray-300 p-2 mt-4 mb-14">
-<p data-type="caption" id="caption">dasda</p>
-</div>
-</div>
-<div class="bg-gray-200 p-2 shadow relative lg:col-span-1" data-post_id="000010" data-type="post" id="post_id">
-<div class="grid grid-cols-2">
-<h1 class="text-2xl font-bold text-gray-800" data-type="title" id="title">test</h1>
-<h6 class="text-right" data-type="date" id="date">08-08-2025</h6>
-</div>
-<div class="bg-gray-300 p-2 mt-4 mb-14">
-<p data-type="caption" id="caption">test</p>
-</div>
-</div>
-<div class="bg-gray-200 p-2 shadow relative lg:col-span-1" data-post_id="000009" data-type="post" id="post_id">
-<div class="grid grid-cols-2">
-<h1 class="text-2xl font-bold text-gray-800" data-type="title" id="title">Web-Vistas </h1>
-<h6 class="text-right" data-type="date" id="date">08-08-2025</h6>
-</div>
-<img alt="" class="w-full max-h-[60vh] object-contain rounded py1" data-type="media" id="media" loading="lazy" src="assets\Screenshot 2025-08-08 170252.png"/>
-<div class="bg-gray-300 p-2 mt-4 mb-14">
-<p data-type="caption" id="caption"></p>
-</div>
-</div>
-<div class="bg-gray-200 p-2 shadow relative lg:col-span-1" data-post_id="000008" data-type="post" id="post_id">
-<div class="grid grid-cols-2">
-<h1 class="text-2xl font-bold text-gray-800" data-type="title" id="title">Dog with ball</h1>
-<h6 class="text-right" data-type="date" id="date">06-28-2025</h6>
-</div>
-<img alt="" class="w-full max-h-[60vh] object-contain rounded py1" data-type="media" id="media" loading="lazy" src="assets\dog with ball +++.png"/>
-<div class="bg-gray-300 p-2 mt-4 mb-14">
-<p data-type="caption" id="caption"></p>
-</div>
-</div>
-<div class="bg-gray-200 p-2 shadow relative lg:col-span-1" data-post_id="000007" data-type="post" id="post_id">
-<div class="grid grid-cols-2">
-<h1 class="text-2xl font-bold text-gray-800" data-type="title" id="title">Wave Function Collapse Text</h1>
-<h6 class="text-right" data-type="date" id="date">06-26-2025</h6>
-</div>
-<img alt="" class="w-full max-h-[60vh] object-contain rounded py1" data-type="media" id="media" loading="lazy" src="assets\wavefunctionmountains.png"/>
-<div class="bg-gray-300 p-2 mt-4 mb-14">
-<p data-type="caption" id="caption">Looking into wave function collapse and potential project ideas. 
-
-This text was made by mapping each char to a set of other chars. Given a char it randomly selects an element from its joined set and makes that char the new input, iterating recursivly. </p>
-</div>
-</div>
-<div class="bg-gray-200 p-2 shadow relative lg:col-span-1" data-post_id="000006" data-type="post" id="post_id">
-<div class="grid grid-cols-2">
-<h1 class="text-2xl font-bold text-gray-800" data-type="title" id="title">Python Packages </h1>
-<h6 class="text-right" data-type="date" id="date">06-19-2025</h6>
-</div>
-<img alt="" class="w-full max-h-[60vh] object-contain rounded py1" data-type="media" id="media" loading="lazy" src="assets\Screenshot 2025-06-18 125106.png"/>
-<div class="bg-gray-300 p-2 mt-4 mb-14">
-<p data-type="caption" id="caption">Thought this was a cool image on the python download page.</p>
-</div>
-</div>
-<div class="bg-gray-200 p-2 shadow relative lg:col-span-1" data-post_id="000005" data-type="post" id="post_id">
-<div class="grid grid-cols-2">
-<h1 class="text-2xl font-bold text-gray-800" data-type="title" id="title">Reject Pie Post Logo
-</h1>
-<h6 class="text-right" data-type="date" id="date">06-15-2025</h6>
-</div>
-<img alt="" class="w-full max-h-[60vh] object-contain rounded py1" data-type="media" id="media" loading="lazy" src="assets\piepost5.png"/>
-<div class="bg-gray-300 p-2 mt-4 mb-14">
-<p data-type="caption" id="caption">E Z as Pie!
-</p>
-</div>
-</div>
-<div class="bg-gray-200 p-2 shadow relative lg:col-span-1" data-post_id="000004" data-type="post" id="post_id">
-<div class="grid grid-cols-2">
-<h1 class="text-2xl font-bold text-gray-800" data-type="title" id="title">Whiteboard with friends
-
-
-</h1>
-<h6 class="text-right" data-type="date" id="date">06-13-2025</h6>
-</div>
-<img alt="" class="w-full max-h-[60vh] object-contain rounded py1" data-type="media" id="media" loading="lazy" src="assets\Screenshot 2025-05-20 232153.png"/>
-<div class="bg-gray-300 p-2 mt-4 mb-14">
-<p data-type="caption" id="caption">:::::::::::::::::::: ::::::::::::::::::::::::::::::::::::::: ::::::::::::::::::::::::::::::::::::::: ::::::::::::::::::::::::::::::::::::::: ::::::::::::::::::::::::::::::::::::::: :::::::::::::::::::::::::::::::::::::::  :::::::::::::::::::::::::
-
-</p>
-</div>
-</div>
-<div class="bg-gray-200 p-2 shadow relative lg:col-span-1" data-post_id="000003" data-type="post" id="post_id">
-<div class="grid grid-cols-2">
-<h1 class="text-2xl font-bold text-gray-800" data-type="title" id="title">Connecting the dots</h1>
-<h6 class="text-right" data-type="date" id="date">06-12-2025</h6>
-</div>
-<img alt="" class="w-full max-h-[60vh] object-contain rounded py1" data-type="media" id="media" loading="lazy" src="assets\Screenshot 2025-06-12 141015.png"/>
-<div class="bg-gray-300 p-2 mt-4 mb-14">
-<p data-type="caption" id="caption">My website now gets the data on my github page. It could also theoretically get any page with json data formated into posts. e.g. a social media feed.Right now the data flows from my python application to github pages then to my personal website. All with one click of a button!</p>
-</div>
-</div>
-<div class="bg-gray-200 p-2 shadow relative lg:col-span-1" data-post_id="000002" data-type="post" id="post_id">
-<div class="grid grid-cols-2">
-<h1 class="text-2xl font-bold text-gray-800" data-type="title" id="title">Green Stripe Color Analysis</h1>
-<h6 class="text-right" data-type="date" id="date">06-10-2025</h6>
-</div>
-<img alt="" class="w-full max-h-[60vh] object-contain rounded py1" data-type="media" id="media" loading="lazy" src="assets\green-stripe ANALYSIS.png"/>
-<div class="bg-gray-300 p-2 mt-4 mb-14">
-<p data-type="caption" id="caption">Green Stripe by Matisse. looking at color relationships. </p>
-</div>
-</div>
-<div class="bg-gray-200 p-2 shadow relative lg:col-span-1" data-post_id="000001" data-type="post" id="post_id">
-<div class="grid grid-cols-2">
-<h1 class="text-2xl font-bold text-gray-800" data-type="title" id="title">First Post Of Website Generator</h1>
-<h6 class="text-right" data-type="date" id="date">06-10-2025</h6>
-</div>
-<img alt="" class="w-full max-h-[60vh] object-contain rounded py1" data-type="media" id="media" loading="lazy" src="assets\Screenshot 2025-05-15 222758.png"/>
-<div class="bg-gray-300 p-2 mt-4 mb-14">
-<p data-type="caption" id="caption">An early screenshot of the website generator that made this post. Wow this took a while but im happy to have it functional. </p>
-</div>
-</div>
-<!--^^^ Grid /div-->
-</div></main>
-<footer class="bg-gradient-to-r from-[#e0e4f8] via-blue-300 to-[#7890f8] p-5">
-<div class="max-w-5xl mx-auto text-center">
-<h1 class="text-md font-serif font-bold text-white">
-   Thanks For visiting my Scrapbook
-  </h1>
-<p class="mt-4 text-xl text-white opacity-90">
-   Mitch Palczewski
-  </p>
+<!--</div> above is the Post Container End -->
+</main>
+<footer class="bg-black border-t border-gray-700 rounded-none p-4 w-full mx-auto text-center">
+<p class="text-gray-500 mb-2">© 2025 My Blog. All rights reserved.</p>
+<div class="space-x-4">
+<a class="text-gray-400 hover:text-yellow-600" href="#privacy">Privacy Policy</a>
+<a class="text-gray-400 hover:text-yellow-600" href="#terms">Terms of Service</a>
+<a class="text-gray-400 hover:text-yellow-600" href="#support">Support</a>
 </div>
 </footer>
-<script src="script.js">
-</script>
 </body>
 </html>
