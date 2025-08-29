@@ -20,5 +20,6 @@
     },
     "username": "Mitch Palczewski",
     "profile_pic": "https://mitch-palczewski.github.io/assets/Screenshot%202024-11-26%20135537.png",
-    "first_load": true
+    "first_load": true,
+    "active_html_webpage": "index.html"
 }

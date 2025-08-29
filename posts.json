@@ -16,5 +16,31 @@
                 "text": "Mitch-Palczewski-Home"
             }
         ]
+    },
+    "000002": {
+        "datetime": "2025-08-29 16:22:37.746969",
+        "title": "NON BELIEF -- TAIWAN INTELLIGENS OF PRECARITY",
+        "caption": "At the Venice Biennale I found this pavilion to be particularly inspiring. The work explored Taiwan's place and precarity in technology, architecture, and culture. It emphasized balance, organic structures and sustainability. Check out the attached links for more details.",
+        "media_links": [
+            "https://mitch-palczewski.github.io/assets/IMG_3495.JPG"
+        ],
+        "base_link": "https://mitch-palczewski.github.io/",
+        "username": "Mitch Palczewski",
+        "profile_pic": "https://mitch-palczewski.github.io/assets/Screenshot%202024-11-26%20135537.png",
+        "email": "",
+        "links": [
+            {
+                "link": "https://vab.arch.ncku.edu.tw/",
+                "text": "NON-BELIEF"
+            },
+            {
+                "link": "https://vab.arch.ncku.edu.tw/articles/proj-ti",
+                "text": "TECH-ISLAND"
+            },
+            {
+                "link": "https://vab.arch.ncku.edu.tw/articles/proj-o",
+                "text": "OLD TOWN - [RAILWAY STATION] - SCIENCE PARK"
+            }
+        ]
     }
 }
