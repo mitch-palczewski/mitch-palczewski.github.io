@@ -8,7 +8,7 @@
         ],
         "base_link": "https://mitch-palczewski.github.io/",
         "username": "Mitch Palczewski",
-        "profile_pic": "https://mitch-palczewski.github.io/assets/Screenshot%202024-11-26%20135537.png",
+        "profile_pic": "https://mitch-palczewski.github.io/assets/IMG_330321.JPG",
         "email": "",
         "links": [
             {
@@ -26,7 +26,7 @@
         ],
         "base_link": "https://mitch-palczewski.github.io/",
         "username": "Mitch Palczewski",
-        "profile_pic": "https://mitch-palczewski.github.io/assets/Screenshot%202024-11-26%20135537.png",
+        "profile_pic": "https://mitch-palczewski.github.io/assets/IMG_330321.JPG",
         "email": "",
         "links": [
             {
@@ -42,5 +42,16 @@
                 "text": "OLD TOWN - [RAILWAY STATION] - SCIENCE PARK"
             }
         ]
+    },
+    "000003": {
+        "datetime": "2025-08-29 16:25:52.476510",
+        "title": "test",
+        "caption": "",
+        "media_links": [],
+        "base_link": "https://mitch-palczewski.github.io/",
+        "username": "Mitch Palczewski",
+        "profile_pic": "https://mitch-palczewski.github.io/assets/IMG_330321.JPG",
+        "email": "",
+        "links": []
     }
 }
