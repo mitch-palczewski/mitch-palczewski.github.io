@@ -62,5 +62,23 @@
         "profile_pic": "https://mitch-palczewski.github.io/assets/IMG_330321.JPG",
         "email": "",
         "links": []
+    },
+    "000004": {
+        "datetime": "2025-09-07 18:15:45.290388",
+        "title": "Shield Man Speaks",
+        "caption": "Shield Man says it like it is. You heard him don't make him angry.",
+        "media_links": [
+            "assets\\Screen Recording 2025-09-07 181319.mp4"
+        ],
+        "base_link": "https://mitch-palczewski.github.io/",
+        "username": "Mitch Palczewski",
+        "profile_pic": "https://mitch-palczewski.github.io/assets/IMG_330321.JPG",
+        "email": "",
+        "links": [
+            {
+                "link": "https://www.mitch-palczewski.com/projects/shield-man",
+                "text": "Speak to the shield man "
+            }
+        ]
     }
 }
